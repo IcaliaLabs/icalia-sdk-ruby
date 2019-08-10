@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'date'
+require 'aws-sdk-sqs'
 
 # rubocop:disable Metrics/BlockLength
 module Icalia::Event::Shoryuken::CLI

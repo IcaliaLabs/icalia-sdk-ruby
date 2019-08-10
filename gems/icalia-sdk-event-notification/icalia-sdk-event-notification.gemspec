@@ -47,8 +47,8 @@ Gem::Specification.new do |spec|
   # only supported on Rails ActiveSupport >= 5.2.0:
   spec.add_dependency 'activesupport', '~> 5.2', '>= 5.2.0'
 
-  spec.add_dependency 'aws-sdk-sqs', '~> 1.20'
   spec.add_dependency 'aws-sdk-sns', '~> 1.19'
+  spec.add_dependency 'aws-sdk-sqs', '~> 1.20'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'
