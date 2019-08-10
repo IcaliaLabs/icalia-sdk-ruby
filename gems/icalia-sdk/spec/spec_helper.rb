@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'icalia-sdk-event-notification'
+require 'icalia-sdk'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

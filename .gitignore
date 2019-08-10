@@ -6,3 +6,6 @@
 **/icalia-sdk*.gem
 
 **/.gem
+
+# Ignore rspec state
+**/.rspec_status

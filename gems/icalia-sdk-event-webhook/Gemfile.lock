@@ -1,0 +1,44 @@
+PATH
+  remote: ../icalia-sdk-event-core
+  specs:
+    icalia-sdk-event-core (0.1.1)
+      jsonapi-deserializable (~> 0.2.0)
+
+PATH
+  remote: .
+  specs:
+    icalia-sdk-event-webhook (0.1.1)
+      icalia-sdk-event-core (= 0.1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.3)
+    jsonapi-deserializable (0.2.0)
+    rake (10.5.0)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.2)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.17)
+  icalia-sdk-event-core!
+  icalia-sdk-event-webhook!
+  rake (~> 10.0)
+  rspec (~> 3.0)
+
+BUNDLED WITH
+   1.17.2
