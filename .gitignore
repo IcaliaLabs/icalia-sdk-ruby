@@ -1,0 +1,8 @@
+# Ignore history files:
+
+**/.*_hist*
+
+# Ignore builds:
+**/icalia-sdk*.gem
+
+**/.gem
