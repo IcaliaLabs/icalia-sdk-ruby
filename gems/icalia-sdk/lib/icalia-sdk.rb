@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-module Icalia
-end
+require 'icalia-sdk/version'
+require 'icalia-sdk-event'
