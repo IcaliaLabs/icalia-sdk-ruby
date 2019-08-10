@@ -1,0 +1,39 @@
+# We'll use the '3.x spec since it supports the 'cache_from'
+# option:
+version: '3.7'
+
+services:
+  # We'll use this in the CI/CD Pipeline to pull images to re-generate the image
+  # cache and push freshly-built images to AWS ECR:
+  image_manager:
+    image: icalialabs/docker-image-manager:latest
+    volumes:
+    # Bind the docker socket:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+    # Bind the docker configuration - including credentials:
+    - ${HOME}/.docker/config.json:/root/.docker/config.json
+
+    # Bind the current working directory:
+    - ${PWD}:${PWD}
+    working_dir: ${PWD}
+    environment:
+      TAG_SAFE_BRANCH: ${TAG_SAFE_BRANCH}
+      GIT_SHORT_SHA: ${GIT_SHORT_SHA}
+      GIT_BRANCH: ${SEMAPHORE_GIT_BRANCH:-master}
+      GIT_SHA: ${SEMAPHORE_GIT_SHA:-xxxxxx}
+      COMPOSE_FILE: .semaphore/ci-compose.yml
+
+  libraries:
+    image: icalia-sdk-ruby:testing
+    build:
+      cache_from:
+        # Since docker-compose will try to build the unused (at this time) runtime
+        # stage, and this project's dev stages and runtime stages start from
+        # different images, we need to include the releaseable image here as well
+        # - this may change with Docker 19.x:
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${GIT_SHORT_SHA}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing
+    command: bundle exec rake spec
+    

@@ -1,0 +1,127 @@
+version: v1.0
+
+name: 'Main Pipeline'
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build Test Image
+    dependencies: []
+    task:
+      env_vars:
+        - name: ICALIA_SDK_REPO
+          value: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby
+      secrets:
+        - name: AWS
+      prologue:
+        commands:
+          - checkout
+
+          # Get the Git branch name safe to use as a docker image tag:
+          - export TAG_SAFE_BRANCH=$(echo ${SEMAPHORE_GIT_BRANCH} | tr '/' '-')
+
+          # Get the short SHA for the commit:
+          - export GIT_SHORT_SHA=${SEMAPHORE_GIT_SHA:0:7}
+
+          # Merge the compose files... TODO: update image manager to accept multiple compose files
+          - docker-compose --file docker-compose.yml --file ci-compose.yml config > .semaphore/ci-compose.yml
+          
+          # Alias docker-compose commands as 'ci-compose':
+          - alias ci-compose="docker-compose --file .semaphore/ci-compose.yml"
+
+          # Log in to AWS ECR:
+          - $(aws ecr get-login --no-include-email --region eu-central-1)
+      jobs:
+        - name: Build
+          commands:
+          # Pull the images referenced in the 'cache_from' key:
+          - ci-compose run image_manager download-cache libraries --break-on-first
+
+          # Build the test image:
+          - ci-compose build --pull libraries
+
+          # Tag & Push test image so we can use it on image cache:
+          - ci-compose run image_manager tag-and-push libraries ${ICALIA_SDK_REPO}
+  
+  - name: SDK Tests
+    dependencies: [ "Build Test Image" ]
+    task:
+      env_vars:
+        - name: ICALIA_SDK_REPO
+          value: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby
+      secrets:
+        - name: AWS
+      prologue:
+        commands:
+          - checkout
+
+          # Get the Git branch name safe to use as a docker image tag:
+          - export TAG_SAFE_BRANCH=$(echo ${SEMAPHORE_GIT_BRANCH} | tr '/' '-')
+
+          # Get the short SHA for the commit:
+          - export GIT_SHORT_SHA=${SEMAPHORE_GIT_SHA:0:7}
+          
+          # Merge the compose files... TODO: update image manager to accept multiple compose files
+          - docker-compose --file docker-compose.yml --file ci-compose.yml config > .semaphore/ci-compose.yml
+
+          # Alias docker-compose commands as 'ci-compose':
+          - alias ci-compose="docker-compose --file .semaphore/ci-compose.yml"
+
+          # Log in to AWS ECR:
+          - $(aws ecr get-login --no-include-email --region eu-central-1)
+          
+          # Pull the images referenced in the 'cache_from' key:
+          - ci-compose run image_manager download-cache libraries --break-on-first
+
+          - docker tag ${ICALIA_SDK_REPO}:testing-${GIT_SHORT_SHA} icalia-sdk-ruby:testing
+      jobs:
+        - name: Event Core
+          commands:
+            # Run the tests
+            - ci-compose run event_core rake spec
+            
+            # Build the gem
+            - ci-compose run event_core gem build icalia-sdk-event-core
+        
+        - name: Event Notification
+          commands:
+            # Run the tests
+            - ci-compose run event_notification rake spec
+            
+            # Build the gem
+            - ci-compose run event_notification gem build icalia-sdk-event-notification
+        
+        - name: Event Webhook
+          commands:
+            # Run the tests
+            - ci-compose run event_webhook rake spec
+            
+            # Build the gem
+            - ci-compose run event_webhook gem build icalia-sdk-event-webhook
+        
+        - name: Event Meta
+          commands:
+            # Run the tests
+            - ci-compose run event_meta rake spec
+            
+            # Build the gem
+            - ci-compose run event_meta gem build icalia-sdk-event
+        
+        - name: SDK Meta
+          commands:
+            # Run the tests
+            - ci-compose run sdk_meta rake spec
+            
+            # Build the gem
+            - ci-compose run sdk_meta gem build icalia-sdk
+
+# promotions:
+# - name: Deploy
+#   pipeline_file: deploy.yml
+#   auto_promote_on:
+#   - result: passed
+#     branch:
+#     - master
