@@ -75,8 +75,6 @@ blocks:
           
           # Pull the images referenced in the 'cache_from' key:
           - ci-compose run image_manager download-cache libraries --break-on-first
-
-          - docker tag ${ICALIA_SDK_REPO}:testing-${GIT_SHORT_SHA} icalia-sdk-ruby:testing
       jobs:
         - name: Event Core
           commands:
@@ -153,8 +151,6 @@ blocks:
           
           # Pull the images referenced in the 'cache_from' key:
           - ci-compose run image_manager download-cache libraries --break-on-first
-
-          - docker tag ${ICALIA_SDK_REPO}:testing-${GIT_SHORT_SHA} icalia-sdk-ruby:testing
       jobs:
         - name: Event Core
           commands:

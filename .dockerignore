@@ -46,3 +46,7 @@ docs/**/*.html
 .scss-lint.yml
 
 **/node_modules
+
+**/.gem
+/.semaphore
+/tmp
