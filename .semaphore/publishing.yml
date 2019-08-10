@@ -9,9 +9,6 @@ agent:
 
 blocks:
   - name: Publish to Rubygems
-    dependencies: [ ]
-    skip:
-      when: "tag !~ '^v(\d+)\.(\d+)\.(\d+)$'"
     task:
       env_vars:
         - name: ICALIA_SDK_REPO
@@ -49,7 +46,6 @@ blocks:
             - ci-compose run event_core gem build icalia-sdk-event-core
             
             - export GEM_FILE=$(find . -name icalia-sdk-*.gem)
-            - echo ${GEM_FILE}
 
             # Push it to rubygems:
             - gem push ${GEM_FILE}
@@ -60,7 +56,6 @@ blocks:
             - ci-compose run event_notification gem build icalia-sdk-event-notification
             
             - export GEM_FILE=$(find . -name icalia-sdk-*.gem)
-            - echo ${GEM_FILE}
 
             # Push it to rubygems:
             - gem push ${GEM_FILE}
@@ -71,7 +66,6 @@ blocks:
             - ci-compose run event_webhook gem build icalia-sdk-event-webhook
             
             - export GEM_FILE=$(find . -name icalia-sdk-*.gem)
-            - echo ${GEM_FILE}
 
             # Push it to rubygems:
             - gem push ${GEM_FILE}
@@ -82,7 +76,6 @@ blocks:
             - ci-compose run event_meta gem build icalia-sdk-event
             
             - export GEM_FILE=$(find . -name icalia-sdk-*.gem)
-            - echo ${GEM_FILE}
 
             # Push it to rubygems:
             - gem push ${GEM_FILE}
@@ -93,7 +86,6 @@ blocks:
             - ci-compose run sdk_meta gem build icalia-sdk
             
             - export GEM_FILE=$(find . -name icalia-sdk-*.gem)
-            - echo ${GEM_FILE}
 
             # Push it to rubygems:
             - gem push ${GEM_FILE}

@@ -9,7 +9,6 @@ agent:
 
 blocks:
   - name: Build Test Image
-    dependencies: []
     task:
       env_vars:
         - name: ICALIA_SDK_REPO
@@ -47,7 +46,6 @@ blocks:
           - ci-compose run image_manager tag-and-push libraries ${ICALIA_SDK_REPO}
   
   - name: SDK Tests
-    dependencies: [ "Build Test Image" ]
     task:
       env_vars:
         - name: ICALIA_SDK_REPO
@@ -115,11 +113,11 @@ blocks:
             
             # Build the gem
             - ci-compose run sdk_meta gem build icalia-sdk
-  
+
 promotions:
-- name: Publish
-  pipeline_file: publish.yml
-  auto_promote_on:
-  - result: passed
-    branch:
-    - master # TODO: Add release branches once we get to 1.0
+  - name: Publish
+    pipeline_file: publishing.yml
+    auto_promote_on:
+      - result: passed
+        branch:
+          - ^refs\/tags\/v(\d+)\.(\d+)\.(\d+)(\.rc\d+)?$
