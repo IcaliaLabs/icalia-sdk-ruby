@@ -9,3 +9,6 @@
 
 # Ignore rspec state
 **/.rspec_status
+
+# Ignore semaphore ci compose - it's generated in the pipeline:
+/.semaphore/ci-compose.yml

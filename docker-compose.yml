@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   libraries: &library
-    image: icalialabs/icalia-sdk-ruby:testing
+    image: icalialabs/icalia-sdk-ruby:development
     build:
       context: .
-      target: testing
+      target: development
     volumes:
       - .:/usr/src
     working_dir: /usr/src
