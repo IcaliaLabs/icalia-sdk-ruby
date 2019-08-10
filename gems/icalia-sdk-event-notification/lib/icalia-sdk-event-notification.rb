@@ -4,7 +4,7 @@ require 'active_support'
 require 'active_support/core_ext/object/blank'
 
 module Icalia
-  module Events
+  module Event
     autoload :Version, 'icalia-sdk-event-notification/version'
     autoload :Publisher, 'icalia-sdk-event-notification/publisher'
     autoload :Notification, 'icalia-sdk-event-notification/notification'

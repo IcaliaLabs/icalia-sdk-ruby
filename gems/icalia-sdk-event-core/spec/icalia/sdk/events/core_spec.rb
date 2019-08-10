@@ -1,6 +1,6 @@
-RSpec.describe Icalia::Sdk::Events::Core do
+RSpec.describe Icalia::Event do
   it "has a version number" do
-    expect(Icalia::Sdk::Events::Core::VERSION).not_to be nil
+    expect(Icalia::Event::CORE_VERSION).not_to be nil
   end
 
   it "does something useful" do

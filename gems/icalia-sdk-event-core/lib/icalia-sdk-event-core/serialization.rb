@@ -20,7 +20,7 @@ module Icalia
     autoload :DeserializablePropertyResource,
              "#{serialization_path}/deserializable_property_resource"
 
-    # Deserializable Events
+    # Event deserialization
 
     autoload :DeserializableMembershipEvent,
              "#{serialization_path}/deserializable_membership_event"

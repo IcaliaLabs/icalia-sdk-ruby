@@ -49,10 +49,10 @@ to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 ## License
 
 The gem is available as open source under the terms of the
-[MIT License](https://opensource.org/licenses/MIT).
+[Apache 2.0 License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the Icalia::Sdk::Events project’s codebases, issue
+Everyone interacting in the icalia-sdk-ruby project’s codebases, issue
 trackers, chat rooms and mailing lists is expected to follow the
 [code of conduct](https://github.com/IcaliaLabs/icalia-sdk-ruby/blob/master/CODE_OF_CONDUCT.md).

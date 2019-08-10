@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Roberto Quintanilla']
   spec.email         = %w[vov@icalialabs.com]
 
-  spec.summary       = 'Icalia SDK for Ruby - Events Core Library'
-  spec.description   = 'Official Icalia SDK for Icalia Events Core' \
+  spec.summary       = 'Icalia SDK for Ruby - Event Core Library'
+  spec.description   = 'Official Icalia SDK for Icalia Event Core' \
                        'This gem is part of the Icalia SDK for Ruby.'
   spec.homepage      = 'https://github.com/IcaliaLabs/icalia-sdk-ruby'
   spec.license       = 'MIT'
