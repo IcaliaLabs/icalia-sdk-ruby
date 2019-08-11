@@ -34,7 +34,10 @@ module Icalia
     # Deserializable Objects
 
     autoload :DeserializableUser,
-            "#{serialization_path}/deserializable_user"
+             "#{serialization_path}/deserializable_user"
+
+    autoload :DeserializableOauthApplication,
+             "#{serialization_path}/deserializable_oauth_application"
 
     autoload :DeserializableOrganization,
               "#{serialization_path}/deserializable_organization"
