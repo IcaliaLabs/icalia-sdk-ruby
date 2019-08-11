@@ -9,6 +9,9 @@ module Icalia::Event::Shoryuken
 
     delegate :logger, to: Shoryuken
 
+    # By default, process all notifications:
+    def process_notification?(notification); true; end
+
     def perform(_sqs_msg, raw_notification)
       notification = Icalia::Event::Notification.new raw_notification
       
@@ -23,10 +26,7 @@ module Icalia::Event::Shoryuken
       send "process_#{action_name.underscore}".to_sym, notification
     end
 
-    delegate :process_notification,
-             :process_notification?,
-             :define_noop_action_processor,
-             to: :class
+    delegate :define_noop_action_processor, to: :class
 
     class ActionProcessorPatternTest
       attr_reader :action_name
@@ -40,26 +40,24 @@ module Icalia::Event::Shoryuken
       def match?; @action_name != nil; end
     end
 
-    class << self
-      def method_missing(method_sym, *arguments, &block)
-        processor_test = ActionProcessorPatternTest.new(method_sym)
-        if processor_test.match?
-          define_noop_action_processor(method_sym, processor_test.action_name)
-          send(method_sym, *arguments)
-        else
-          super
-        end
-      end
-  
-      def define_noop_action_processor(action_processor_method, action_name)
-        define_singleton_method action_processor_method do |*args|
-          logger.info "#{name} does not know how to process #{action_name}" \
-                      " - Ignoring message"
-        end
-        delegate action_processor_method, to: :class
+    def method_missing(method_sym, *arguments, &block)
+      processor_test = ActionProcessorPatternTest.new(method_sym)
+      
+      if processor_test.match?
+        define_noop_action_processor(method_sym, processor_test.action_name)
+        return send(method_sym, *arguments)
       end
 
-      def process_data?(data); true; end
+      super
+    end
+
+    def self.define_noop_action_processor(action_processor_method, action_name)
+      return if method_defined? action_processor_method
+      
+      define_method action_processor_method do |*args|
+        logger.info "#{self.class.name} does not know how to process " \
+                    "#{action_name} - Ignoring message"
+      end
     end
   end
 end
