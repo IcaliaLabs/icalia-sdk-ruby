@@ -28,7 +28,7 @@ module Icalia
     autoload :DeserializableOrganizationEvent,
              "#{serialization_path}/deserializable_organization_event"
 
-    autoload :DeserializableOAuthAccessTokenEvent,
+    autoload :DeserializableOauthAccessTokenEvent,
              "#{serialization_path}/deserializable_oauth_access_token_event"
 
     # Deserializable Objects

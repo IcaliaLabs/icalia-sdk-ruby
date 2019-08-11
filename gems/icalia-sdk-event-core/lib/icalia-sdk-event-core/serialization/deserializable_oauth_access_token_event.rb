@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Icalia::Event
-  #= DeserializableIcaliaAccessTokenEvent
+  #= DeserializableOauthAccessTokenEvent
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia OAuth Access Token event
-  class DeserializableOAuthAccessTokenEvent < JSONAPI::Deserializable::Resource
+  class DeserializableOauthAccessTokenEvent < JSONAPI::Deserializable::Resource
     include DeserializableResourceIdentity
     include DeserializableResourceAction
     include DeserializableResourceCreationTimestamp
