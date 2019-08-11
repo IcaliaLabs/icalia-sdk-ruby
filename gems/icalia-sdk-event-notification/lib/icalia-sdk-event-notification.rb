@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'icalia-sdk-event-core'
+
 require 'active_support'
 require 'active_support/core_ext/object/blank'
 
