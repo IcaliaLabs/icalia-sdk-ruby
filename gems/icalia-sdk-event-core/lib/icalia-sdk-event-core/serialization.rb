@@ -36,6 +36,9 @@ module Icalia
     autoload :DeserializableUser,
              "#{serialization_path}/deserializable_user"
 
+    autoload :DeserializableOauthAccessToken,
+             "#{serialization_path}/deserializable_oauth_access_token"
+
     autoload :DeserializableOauthApplication,
              "#{serialization_path}/deserializable_oauth_application"
 
