@@ -12,3 +12,7 @@
 
 # Ignore semaphore ci compose - it's generated in the pipeline:
 /.semaphore/ci-compose.yml
+
+# Ignore dotenv files:
+**/*.env
+!**/*example.env
