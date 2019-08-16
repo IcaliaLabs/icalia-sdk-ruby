@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
 
   # We require mattr_reader to be able to accept a `default` value, which is
   # only supported on Rails ActiveSupport >= 5.2.0:
-  spec.add_dependency 'activesupport', '~> 5.2', '>= 5.2.0'
+  spec.add_dependency 'activesupport', '>= 5.2.0'
 
   spec.add_dependency 'aws-sdk-sns', '~> 1.19'
   spec.add_dependency 'aws-sdk-sqs', '~> 1.20'
