@@ -19,15 +19,20 @@ services:
 
   event_core:
     <<: *library
+    working_dir: /usr/src/gems/icalia-sdk-event-core
 
   event_notification:
     <<: *library
+    working_dir: /usr/src/gems/icalia-sdk-event-notification
 
   event_webhook:
     <<: *library
+    working_dir: /usr/src/gems/icalia-sdk-event-webhook
 
   event_meta:
     <<: *library
+    working_dir: /usr/src/gems/icalia-sdk-event
 
   sdk_meta:
     <<: *library
+    working_dir: /usr/src/gems/icalia-sdk
