@@ -132,8 +132,14 @@ if "#{@service_name}" == ''
   exit 1
 end
 
-require 'yaml'
-@config = YAML.load_file 'semaphore-compose.yml'
+@config ||= begin
+  require 'yaml'
+  config_str = %x[docker-compose --file docker-compose.yml --file ci-compose.yml config]
+  YAML.load config_str
+rescue
+  puts config_str
+  exit 1
+end  
 
 if "#{@service_name}" == ''
   puts "No service name given"
