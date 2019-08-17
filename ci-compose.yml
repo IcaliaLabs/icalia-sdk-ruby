@@ -6,6 +6,7 @@ services:
   libraries: &library
     image: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${GIT_SHORT_SHA:-latest}
     build:
+      target: testing
       context: .
       cache_from:
         # Since docker-compose will try to build the unused (at this time) runtime
