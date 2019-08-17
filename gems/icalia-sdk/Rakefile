@@ -1,6 +1,18 @@
-require 'bundler/gem_tasks'
+$LOAD_PATH.unshift File.expand_path('./lib', __dir__)
+
 require 'rspec/core/rake_task'
+require 'icalia-sdk/version'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task default: :spec
+
+desc "Build icalia-sdk-#{Icalia::VERSION}.gem"
+task :build do
+  system 'gem build icalia-sdk.gemspec'
+end
+
+desc "Build and push icalia-sdk-#{Icalia::VERSION}.gem"
+task release: :build do
+  system "gem push icalia-sdk-#{Icalia::VERSION}.gem"
+end

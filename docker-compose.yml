@@ -1,32 +1,19 @@
 version: '3.7'
 
+networks:
+  backend:
+
 services:
-  libraries: &library
-    image: icalialabs/icalia-sdk-ruby:development
-    build:
-      context: .
-      target: development
-    volumes:
-      - .:/usr/src
-    working_dir: /usr/src
-    entrypoint: /usr/src/bin/dev-entrypoint.sh
-
-  event_core:
-    <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-core
-
-  event_notification:
-    <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-notification
-  
-  event_webhook:
-    <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-webhook
-  
-  event_meta:
-    <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event
-  
-  sdk_meta:
-    <<: *library
-    working_dir: /usr/src/gems/icalia-sdk
+  # Emulates AWS SNS and SQS - see https://github.com/p4tin/goaws
+  goaws:
+    image: pafortin/goaws
+    ports:
+      - ${ICALIA_SDK_SNS_PORT:-4100}:4100
+    volumes: [ './goaws-config.yaml:/conf/goaws.yaml' ]
+    networks:
+      backend:
+        aliases:
+          - sqs.goaws
+          - sns.goaws
+          - sqs.us-west-2.goaws
+          - sns.us-west-2.goaws

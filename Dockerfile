@@ -46,3 +46,8 @@ WORKDIR /usr/src
 
 # Step X: Install all ruby library dependencies
 RUN cd gems/icalia-sdk && bundle install --jobs=4 --retry=3
+
+# Stage II: Testing:
+FROM development AS testing
+
+COPY . /usr/src/
