@@ -108,4 +108,5 @@ promotions:
     auto_promote_on:
       - result: passed
         branch:
+          - feature/improved-ci-build-times
           - ^refs\/tags\/v(\d+)\.(\d+)\.(\d+)(\.rc\d+)?$

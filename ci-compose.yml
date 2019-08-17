@@ -17,6 +17,8 @@ services:
         - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${TAG_SAFE_BRANCH}
         - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing
     command: bundle exec rake spec
+    volumes:
+      - ${HOME}/.gem/credentials:/root/.gem/credentials
 
   event_core:
     <<: *library
