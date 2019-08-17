@@ -1,5 +1,8 @@
 version: '3.7'
 
+networks:
+  backend:
+
 services:
   # Emulates AWS SNS and SQS - see https://github.com/p4tin/goaws
   goaws:
