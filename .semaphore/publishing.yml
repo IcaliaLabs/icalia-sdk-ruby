@@ -17,6 +17,9 @@ blocks:
         commands:
           - checkout
 
+          # Correct the permissions on rubygems credentials:
+          - chmod 0600 /home/semaphore/.gem/credentials
+
           # Add the scripts for CI to the PATH:
           - export PATH=$(pwd)/.semaphore/bin:${PATH}
 
