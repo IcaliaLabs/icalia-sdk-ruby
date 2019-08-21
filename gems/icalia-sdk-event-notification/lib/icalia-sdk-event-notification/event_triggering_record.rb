@@ -13,6 +13,7 @@ module Icalia::Event
 
     included do
       mattr_reader :delayed_icalia_event_publishing, default: true
+      mattr_reader :icalia_event_publishing_enabled, default: true
 
       after_commit :publish_create_to_icalia_events, on: :create
       after_commit :publish_update_to_icalia_events, on: :update
@@ -22,6 +23,7 @@ module Icalia::Event
                :icalia_event_publisher_class,
                :icalia_events_publisher_method,
                :delayed_icalia_event_publishing?,
+               :icalia_event_publishing_enabled?,
                to: :class
     end
 
@@ -44,10 +46,7 @@ module Icalia::Event
       end
 
       def icalia_event_publishing_enabled?
-        :publish_to_icalia_events.in? self
-          ._commit_callbacks
-          .select { |callback| callback.kind.eql?(:after) }
-          .map(&:filter)
+        icalia_event_publishing_enabled == true
       end
     
       def icalia_event_publishing_disabled?
@@ -55,11 +54,11 @@ module Icalia::Event
       end
     
       def disable_icalia_event_publishing
-        skip_callback(:commit, :after, :publish_to_icalia_events)
+        class_variable_set :@@icalia_event_publishing_enabled, false
       end
     
       def enable_icalia_event_publishing
-        set_callback(:commit, :after, :publish_to_icalia_events)
+        class_variable_set :@@icalia_event_publishing_enabled, true
       end
     
       def without_icalia_event_publishing(&_block)
@@ -67,6 +66,8 @@ module Icalia::Event
         result = yield self
         enable_icalia_event_publishing if icalia_event_publishing_disabled?
         result
+      ensure
+        enable_icalia_event_publishing if icalia_event_publishing_disabled?
       end
     
       def icalia_event_class_name
@@ -86,6 +87,7 @@ module Icalia::Event
     private
 
       def publish_to_icalia_events(action)
+        return unless icalia_event_publishing_enabled?
         publisher_class = icalia_event_publisher_class
         return unless publisher_class.present?
         publisher_class.send icalia_events_publisher_method, action.to_s, self 
