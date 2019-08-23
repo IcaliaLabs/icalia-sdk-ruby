@@ -2,20 +2,20 @@
 
 module Icalia
   module Event
-    serialization_path = 'icalia-sdk-event-core/serialization'
-  
+    serialization_path = "icalia-sdk-event-core/serialization"
+
     # Deserialization Modules:
     autoload :DeserializableResourceIdentity,
-            "#{serialization_path}/deserializable_resource_identity"
+             "#{serialization_path}/deserializable_resource_identity"
 
     autoload :DeserializableResourceAction,
-    "#{serialization_path}/deserializable_resource_action"
+             "#{serialization_path}/deserializable_resource_action"
 
     autoload :DeserializableResourceCreationTimestamp,
-            "#{serialization_path}/deserializable_resource_creation_timestamp"
+             "#{serialization_path}/deserializable_resource_creation_timestamp"
 
     autoload :DeserializableResourceTimestamps,
-            "#{serialization_path}/deserializable_resource_timestamps"
+             "#{serialization_path}/deserializable_resource_timestamps"
 
     autoload :DeserializablePropertyResource,
              "#{serialization_path}/deserializable_property_resource"
@@ -33,6 +33,12 @@ module Icalia
 
     # Deserializable Objects
 
+    autoload :DeserializableMembership,
+             "#{serialization_path}/deserializable_membership"
+
+    autoload :DeserializableEmailAccount,
+             "#{serialization_path}/deserializable_email_account"
+
     autoload :DeserializableUser,
              "#{serialization_path}/deserializable_user"
 
@@ -46,10 +52,10 @@ module Icalia
              "#{serialization_path}/deserializable_oauth_application"
 
     autoload :DeserializableOrganization,
-              "#{serialization_path}/deserializable_organization"
+             "#{serialization_path}/deserializable_organization"
 
     autoload :DeserializableCodeRepositoryEvent,
-            "#{serialization_path}/deserializable_code_repository_event"
+             "#{serialization_path}/deserializable_code_repository_event"
 
     autoload :DeserializableCodeRepository,
              "#{serialization_path}/deserializable_code_repository"
