@@ -6,6 +6,7 @@ module Icalia::Event
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia Event's `User` object
   class DeserializableCloudIdentity < JSONAPI::Deserializable::Resource
+    include DeserializableResourceIdentity
     include DeserializableResourceTimestamps
 
     attributes :name, :provider
@@ -13,10 +14,8 @@ module Icalia::Event
     attribute(:'identity-type') { |value| Hash[type: value] }
     attribute(:'id-at-provider') { |value| Hash[uid: value.to_s] }
 
-    has_one :'directory-entry' do |_rel, id, type|
-      next Hash[] if type.blank?
-
-      Hash["#{type}_id".to_sym => id]
+    has_one :owner do |_rel, id, type|
+      Hash[owner_id: id, owner_type: classify_type(type)]
     end
   end
 end

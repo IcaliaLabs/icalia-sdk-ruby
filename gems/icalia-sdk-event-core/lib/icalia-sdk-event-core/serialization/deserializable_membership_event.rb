@@ -10,12 +10,12 @@ module Icalia::Event
     include DeserializableResourceAction
     include DeserializableResourceCreationTimestamp
 
-    has_one :member do |_rel, id, type|
-      Hash[member_id: id, member_type: classify_type(type)]
+    has_one :membership do |_rel, id, type|
+      Hash[membership_id: id, membership_type: classify_type(type)]
     end
     
-    has_one :organization do |_rel, id, type|
-      Hash[organization_id: id, organization_type: classify_type(type)]
+    has_one :sender do |_rel, id, type|
+      Hash[sender_id: id, sender_type: classify_type(type)]
     end
   end
 end
