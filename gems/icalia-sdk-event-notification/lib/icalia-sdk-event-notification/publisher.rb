@@ -19,7 +19,7 @@ module Icalia::Event
       delegate :publish, to: :instance
     end
 
-    attr_reader :sns_client
+    attr_reader :sns_client, :logger
 
     def initialize
       set_sns_client
