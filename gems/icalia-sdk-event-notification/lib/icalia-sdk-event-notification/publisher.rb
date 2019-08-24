@@ -2,6 +2,9 @@
 
 require 'aws-sdk-sns'
 
+require 'active_support'
+require 'active_support/logger'
+
 module Icalia::Event
   class Publisher
 
@@ -19,7 +22,8 @@ module Icalia::Event
     attr_reader :sns_client
 
     def initialize
-      @sns_client = Aws::SNS::Resource.new Icalia::Event.sns_client_options
+      set_sns_client
+      set_logger
     end
 
     def publish(topic_name, data, json_data: true)
@@ -27,6 +31,7 @@ module Icalia::Event
         unless topic_exists?(topic_name)
 
       topic = get_topic topic_name
+      logger.debug "Publishing to '#{topic_name}': #{data.inspect}"
       topic.publish message: (json_data ? json_encode(data) : data)
     end
 
@@ -42,6 +47,27 @@ module Icalia::Event
 
     def topic_exists?(topic_name)
       get_topic(topic_name).present?
+    end
+
+    def set_sns_client
+      @sns_client = Aws::SNS::Resource.new Icalia::Event.sns_client_options
+    end
+
+    def set_logger
+      return use_rails_logger if rails_logger_exist?
+      use_default_logger
+    end
+
+    def rails_logger_exist?
+      defined?(Rails) && Rails.logger.present?
+    end
+
+    def use_rails_logger
+      @logger = Rails.logger
+    end
+
+    def use_default_logger
+      @logger = ActiveSupport::Logger.new(STDOUT)
     end
   end
 end
