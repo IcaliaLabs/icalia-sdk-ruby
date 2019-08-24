@@ -13,9 +13,6 @@ module Icalia
     
     autoload :Shoryuken, 'icalia-sdk-event-notification/shoryuken'
     
-    autoload :EventTriggeringRecord,
-             'icalia-sdk-event-notification/event_triggering_record'
-    
     autoload :TopicMessageProcessing,
              'icalia-sdk-event-notification/topic_message_processing'
 

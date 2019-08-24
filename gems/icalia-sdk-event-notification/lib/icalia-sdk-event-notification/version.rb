@@ -2,6 +2,6 @@
 
 module Icalia
   module Event
-    NOTIFICATION_VERSION = '0.1.11'
+    NOTIFICATION_VERSION = '0.1.12'
   end
 end
