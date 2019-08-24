@@ -1,14 +1,14 @@
 PATH
   remote: ../icalia-sdk-event-core
   specs:
-    icalia-sdk-event-core (0.1.12)
+    icalia-sdk-event-core (0.1.13)
       jsonapi-deserializable (~> 0.2.0)
 
 PATH
   remote: .
   specs:
-    icalia-sdk-event-webhook (0.1.12)
-      icalia-sdk-event-core (= 0.1.12)
+    icalia-sdk-event-webhook (0.1.13)
+      icalia-sdk-event-core (= 0.1.13)
 
 GEM
   remote: https://rubygems.org/
