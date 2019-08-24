@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    icalia-sdk-event-core (0.1.11)
+    icalia-sdk-event-core (0.1.12)
       jsonapi-deserializable (~> 0.2.0)
 
 GEM
