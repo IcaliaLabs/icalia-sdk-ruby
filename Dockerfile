@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-alpine AS development
+FROM ruby:2.6.3-buster AS development
 
 # Copy all files required to run "bundle install":
 
