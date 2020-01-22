@@ -11,8 +11,6 @@ module Icalia
     autoload :Publisher, 'icalia-sdk-event-notification/publisher'
     autoload :Notification, 'icalia-sdk-event-notification/notification'
     
-    autoload :Shoryuken, 'icalia-sdk-event-notification/shoryuken'
-    
     autoload :TopicMessageProcessing,
              'icalia-sdk-event-notification/topic_message_processing'
 
