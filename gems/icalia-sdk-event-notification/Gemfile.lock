@@ -1,16 +1,16 @@
 PATH
   remote: ../icalia-sdk-event-core
   specs:
-    icalia-sdk-event-core (0.1.13)
+    icalia-sdk-event-core (0.2.0)
       jsonapi-deserializable (~> 0.2.0)
 
 PATH
   remote: .
   specs:
-    icalia-sdk-event-notification (0.1.13)
+    icalia-sdk-event-notification (0.2.0)
       activesupport (>= 5.2.0)
       google-cloud-pubsub (~> 0.31)
-      icalia-sdk-event-core (= 0.1.13)
+      icalia-sdk-event-core (= 0.2.0)
 
 GEM
   remote: https://rubygems.org/
