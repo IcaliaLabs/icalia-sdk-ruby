@@ -2,6 +2,6 @@
 
 module Icalia
   module Event
-    CORE_VERSION = '0.1.13'
+    CORE_VERSION = '0.2.0'
   end
 end
