@@ -5,6 +5,8 @@ require 'google/cloud/pubsub'
 require 'active_support'
 require 'active_support/logger'
 
+require 'msgpack'
+
 module Icalia::Event
   module GRPCRailsLogger
     def logger; Rails.logger; end
@@ -26,17 +28,16 @@ module Icalia::Event
 
     attr_reader :client, :logger
 
-    delegate :encode, to: ActiveSupport::JSON, prefix: :json
+    delegate :pack, to: MessagePack, prefix: :message
 
     def initialize
       initialize_pubsub_client
       initialize_logger
     end
 
-    def publish(topic_name, data, attributes = { json_data: true })
+    def publish(topic_name, data, attributes = {})
       logger.debug "Publishing to '#{topic_name}': #{data.inspect}"
-      encoded_data = attributes[:json_data] ? json_encode(data) : data
-      get_or_create_topic(topic_name).publish(encoded_data, attributes)
+      get_or_create_topic(topic_name).publish message_pack(data), attributes
     end
 
     protected
