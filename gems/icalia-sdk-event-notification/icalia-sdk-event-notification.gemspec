@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   # We require mattr_reader to be able to accept a `default` value, which is
   # only supported on Rails ActiveSupport >= 5.2.0:
   spec.add_dependency 'activesupport', '>= 5.2.0'
-
+  spec.add_dependency 'msgpack', '~> 1.3'
   spec.add_dependency 'google-cloud-pubsub', '~> 0.31'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
