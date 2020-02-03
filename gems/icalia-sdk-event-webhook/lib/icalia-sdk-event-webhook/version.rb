@@ -2,6 +2,6 @@
 
 module Icalia
   module Event
-    WEBHOOK_VERSION = '0.2.0'
+    WEBHOOK_VERSION = '0.3.0'
   end
 end
