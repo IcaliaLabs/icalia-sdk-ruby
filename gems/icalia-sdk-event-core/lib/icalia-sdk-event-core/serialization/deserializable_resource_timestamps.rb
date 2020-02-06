@@ -6,7 +6,7 @@ module Icalia::Event
 
     included do
       include DeserializableResourceCreationTimestamp
-      attribute(:'updated-at') { |value| Hash[updated_at: value] }
+      attribute(:'updated-at') { |value| Hash[updated_at: Time.parse(value)] }
     end
   end
 end

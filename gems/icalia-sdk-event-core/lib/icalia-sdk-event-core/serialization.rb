@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'jsonapi/deserializable'
+
 module Icalia
   module Event
     serialization_path = "icalia-sdk-event-core/serialization"
+
+    autoload :Deserializer, "#{serialization_path}/deserializer"
 
     # Deserialization Modules:
     autoload :DeserializableResourceIdentity,
@@ -56,6 +60,18 @@ module Icalia
 
     autoload :DeserializableCodeRepositoryEvent,
              "#{serialization_path}/deserializable_code_repository_event"
+
+    autoload :DeserializableCodeMergeRequest,
+             "#{serialization_path}/deserializable_code_merge_request"
+
+    autoload :DeserializableCodeMergeRequestEvent,
+             "#{serialization_path}/deserializable_code_merge_request_event"
+
+    autoload :DeserializableCodeCommit,
+             "#{serialization_path}/deserializable_code_commit"
+
+    autoload :DeserializableCodeCommitReference,
+             "#{serialization_path}/deserializable_code_commit_reference"
 
     autoload :DeserializableCodeRepository,
              "#{serialization_path}/deserializable_code_repository"
