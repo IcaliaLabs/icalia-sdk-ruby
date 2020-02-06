@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'jsonapi/deserializable'
+
 module Icalia
   module Event
     serialization_path = "icalia-sdk-event-core/serialization"
