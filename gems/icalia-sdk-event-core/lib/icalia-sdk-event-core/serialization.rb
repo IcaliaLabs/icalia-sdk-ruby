@@ -57,6 +57,18 @@ module Icalia
     autoload :DeserializableCodeRepositoryEvent,
              "#{serialization_path}/deserializable_code_repository_event"
 
+    autoload :DeserializableCodeMergeRequest,
+             "#{serialization_path}/deserializable_code_merge_request"
+
+    autoload :DeserializableCodeMergeRequestEvent,
+             "#{serialization_path}/deserializable_code_merge_request_event"
+
+    autoload :DeserializableCodeCommit,
+             "#{serialization_path}/deserializable_code_commit"
+
+    autoload :DeserializableCodeCommitReference,
+             "#{serialization_path}/deserializable_code_commit_reference"
+
     autoload :DeserializableCodeRepository,
              "#{serialization_path}/deserializable_code_repository"
 

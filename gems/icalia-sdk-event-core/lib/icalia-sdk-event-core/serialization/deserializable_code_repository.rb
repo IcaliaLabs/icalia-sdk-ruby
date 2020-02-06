@@ -10,6 +10,18 @@ module Icalia::Event
     include DeserializablePropertyResource   # has one owner
     include DeserializableResourceCreationTimestamp
 
-    attributes :name, :private, :fork, :'default-branch'
+    attributes :name, :private, :fork, :provider, :description, :url, :fork,
+               :exists, :archived
+
+    attribute(:'html-url') { |value| Hash[html_url: value]}
+    attribute(:'full-name') { |value| Hash[full_name: value] }
+    
+    attribute(:'id-at-provider') { |value| Hash[id_at_provider: value] }
+    attribute(:'default-branch') { |value| Hash[default_branch: value] }
+
+    has_one :owner do |_rel, id, type|
+      stand_in = Icalia::ModelProxy.new id: id, type: classify_type(type)
+      Hash[owner: stand_in]
+    end
   end
 end

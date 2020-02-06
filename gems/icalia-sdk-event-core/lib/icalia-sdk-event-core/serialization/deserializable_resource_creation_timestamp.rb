@@ -5,7 +5,7 @@ module Icalia::Event
     extend ActiveSupport::Concern
 
     included do
-      attribute(:'created-at') { |value| Hash[created_at: value] }
+      attribute(:'created-at') { |value| Hash[created_at: Time.parse(value)] }
     end
   end
 end
