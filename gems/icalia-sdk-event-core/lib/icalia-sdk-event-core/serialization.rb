@@ -6,6 +6,8 @@ module Icalia
   module Event
     serialization_path = "icalia-sdk-event-core/serialization"
 
+    autoload :Deserializer, "#{serialization_path}/deserializer"
+
     # Deserialization Modules:
     autoload :DeserializableResourceIdentity,
              "#{serialization_path}/deserializable_resource_identity"
