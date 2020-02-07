@@ -10,6 +10,6 @@ module Icalia::Event
     include DeserializablePropertyResource   # has one owner
     include DeserializableResourceTimestamps # created_at and updated_at
 
-    attributes :name, :email
+    attributes :name
   end
 end

@@ -5,6 +5,9 @@ module Icalia
     include ResourceAction
     attr_reader :merge_request
 
-    def closed?; action == 'closed'; end
+    def opened?; action == 'opened'; end
+    def updated?; action == 'updated'; end
+    def merged?; action == 'merged'; end
+    def declined?; action == 'declined'; end
   end
 end
