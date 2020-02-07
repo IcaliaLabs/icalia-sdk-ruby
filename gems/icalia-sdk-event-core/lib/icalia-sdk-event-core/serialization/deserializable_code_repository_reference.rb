@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Icalia::Event
-  #= DeserializableCodeCommitReference
+  #= DeserializableCodeRepositoryReference
   #
   # This class is responsible for converting a JSONAPI.org representation of an
-  # Icalia `CodeCommitReference` object
-  class DeserializableCodeCommitReference < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity   # id and type
+  # Icalia `CodeRepositoryReference` object
+  class DeserializableCodeRepositoryReference < JSONAPI::Deserializable::Resource
+    include DeserializableResourceIdentity # id and type
 
     attributes :name, :label
 
