@@ -9,6 +9,7 @@ module Icalia
   module Event
     autoload :Version, 'icalia-sdk-event-notification/version'
     autoload :Publisher, 'icalia-sdk-event-notification/publisher'
+    autoload :Subscriber, 'icalia-sdk-event-notification/subscriber'
     autoload :Notification, 'icalia-sdk-event-notification/notification'
     
     autoload :TopicMessageProcessing,
