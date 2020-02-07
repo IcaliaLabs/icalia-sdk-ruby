@@ -13,6 +13,7 @@ module Icalia
 
   # Core Models:
   autoload :Person, "#{models_path}/person"
+  autoload :Organization, "#{models_path}/organization"
 
   autoload :CodeCommit, "#{models_path}/code_commit"
   autoload :CodeRepository, "#{models_path}/code_repository"
