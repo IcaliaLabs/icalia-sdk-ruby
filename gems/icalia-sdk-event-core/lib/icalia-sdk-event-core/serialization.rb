@@ -70,11 +70,11 @@ module Icalia
     autoload :DeserializableCodeCommit,
              "#{serialization_path}/deserializable_code_commit"
 
-    autoload :DeserializableCodeCommitReference,
-             "#{serialization_path}/deserializable_code_commit_reference"
-
     autoload :DeserializableCodeRepository,
              "#{serialization_path}/deserializable_code_repository"
+
+    autoload :DeserializableCodeRepositoryReference,
+             "#{serialization_path}/deserializable_code_repository_reference"
 
     autoload :DeserializableCloudIdentity,
              "#{serialization_path}/deserializable_cloud_identity"
