@@ -1,15 +1,15 @@
 PATH
   remote: ../icalia-sdk-event-core
   specs:
-    icalia-sdk-event-core (0.3.1)
+    icalia-sdk-event-core (0.3.2)
       activemodel (>= 5.0)
       jsonapi-deserializable (~> 0.2.0)
 
 PATH
   remote: .
   specs:
-    icalia-sdk-event-webhook (0.3.1)
-      icalia-sdk-event-core (= 0.3.1)
+    icalia-sdk-event-webhook (0.3.2)
+      icalia-sdk-event-core (= 0.3.2)
 
 GEM
   remote: https://rubygems.org/
