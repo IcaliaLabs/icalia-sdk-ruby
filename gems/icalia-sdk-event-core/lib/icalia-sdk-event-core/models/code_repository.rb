@@ -4,7 +4,7 @@ module Icalia
   class CodeRepository < ModelBase
     include ResourceIdentity
     
-    attr_reader :owner # DeserializablePropertyResource   # has one owner
+    has_one :owner # DeserializablePropertyResource   # has one owner
 
     attr_reader :created_at # include DeserializableResourceCreationTimestamp
 

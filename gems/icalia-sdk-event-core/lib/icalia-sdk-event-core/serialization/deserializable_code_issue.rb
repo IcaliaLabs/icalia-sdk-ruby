@@ -6,9 +6,7 @@ module Icalia::Event
   # Converts a JSONAPI.org serialization of a `CodeIssue` object from a
   # Notification topic into an `ActionController::Parameters` object that can be
   # used to create or update code issue data
-  class DeserializableCodeIssue < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
-    
+  class DeserializableCodeIssue < DeserializableResource
     LOCATION_DATA_KEYS = %w[path start-line end-line]
 
     def self.deserialize_location_data(location_data)

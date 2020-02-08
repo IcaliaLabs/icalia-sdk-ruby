@@ -5,8 +5,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia OAuth Application
-  class DeserializableOauthApplication < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
+  class DeserializableOauthApplication < DeserializableResource
     include DeserializableResourceTimestamps
 
     attributes :name

@@ -5,8 +5,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia Event's `CodeRepository` object
-  class DeserializableCodeRepository < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity   # id and type
+  class DeserializableCodeRepository < DeserializableResource
     include DeserializablePropertyResource   # has one owner
     include DeserializableResourceCreationTimestamp
 

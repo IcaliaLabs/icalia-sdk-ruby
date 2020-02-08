@@ -3,8 +3,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation
   # of an Icalia Event's `CodeCheckRunEvent` object
-  class DeserializableCodeCheckRunEvent < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
+  class DeserializableCodeCheckRunEvent < DeserializableResource
     include DeserializableResourceAction
     include DeserializableResourceCreationTimestamp
     

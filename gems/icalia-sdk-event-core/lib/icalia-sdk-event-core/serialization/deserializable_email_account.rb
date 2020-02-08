@@ -6,14 +6,13 @@ module Icalia::Event
   # Converts a JSONAPI.org serialization of a `EmailAccount` object from a
   # Notification topic into an `ActionController::Parameters` object that can be
   # used to create or update an email account
-  class DeserializableEmailAccount < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
-    
+  class DeserializableEmailAccount < DeserializableResource
+    include DeserializableResourceCreationTimestamp
+
     attribute :address
-    attribute(:'created-at') { |value| Hash[created_at: value] }
 
     has_one :owner do |_rel, id, type|
-      Hash[owner_id: id, owner_type: classify_type(type)]
+      Hash[owner: get_stand_in(id: id, type: classify_type(type))]
     end
   end
 end
