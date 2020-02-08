@@ -5,8 +5,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia Event's `User` object
-  class DeserializableCloudIdentity < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
+  class DeserializableCloudIdentity < DeserializableResource
     include DeserializableResourceTimestamps
 
     attributes :name, :provider

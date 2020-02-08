@@ -5,7 +5,7 @@ module Icalia
   
   autoload :ModelBase, "#{models_path}/model_base"
   autoload :ModelProxy, "#{models_path}/model_proxy"
-
+  autoload :ModelCollectionProxy, "#{models_path}/model_collection_proxy"
 
   autoload :ResourceIdentity, "#{models_path}/resource_identity"
   autoload :ResourceAction, "#{models_path}/resource_action"
@@ -22,5 +22,6 @@ module Icalia
   autoload :CodeMergeRequest, "#{models_path}/code_merge_request"
 
   # Event Models:
-  autoload :CodeMergeRequestEvent, "#{models_path}/code_merge_request_event"
+  event_models_path = "#{models_path}/events"
+  autoload :CodeMergeRequestEvent, "#{event_models_path}/code_merge_request_event"
 end

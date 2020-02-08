@@ -9,8 +9,7 @@ module Icalia::Event
       attribute(:timestamp) { |value| Hash[timestamp: Time.parse(value)] }
 
       has_one :actor do |_rel, id, type|
-        stand_in = Icalia::ModelProxy.new id: id, type: classify_type(type)
-        Hash[actor: stand_in]
+        Hash[actor: get_stand_in(id: id, type: classify_type(type))]
       end
     end
   end
