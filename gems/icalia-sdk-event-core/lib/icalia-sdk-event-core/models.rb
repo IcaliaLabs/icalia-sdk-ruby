@@ -22,5 +22,6 @@ module Icalia
   autoload :CodeMergeRequest, "#{models_path}/code_merge_request"
 
   # Event Models:
-  autoload :CodeMergeRequestEvent, "#{models_path}/code_merge_request_event"
+  event_models_path = "#{models_path}/events"
+  autoload :CodeMergeRequestEvent, "#{event_models_path}/code_merge_request_event"
 end
