@@ -15,6 +15,11 @@ module Icalia
   autoload :Person, "#{models_path}/person"
   autoload :Organization, "#{models_path}/organization"
 
+  autoload :EmailAccount, "#{models_path}/email_account"
+  autoload :CloudIdentity, "#{models_path}/cloud_identity"
+
+  autoload :Membership, "#{models_path}/membership"
+
   autoload :CodeCommit, "#{models_path}/code_commit"
   autoload :CodeRepository, "#{models_path}/code_repository"
   autoload :CodeRepositoryReference, "#{models_path}/code_repository_reference"
@@ -23,5 +28,6 @@ module Icalia
 
   # Event Models:
   event_models_path = "#{models_path}/events"
+  autoload :MembershipEvent, "#{event_models_path}/code_merge_request_event"
   autoload :CodeMergeRequestEvent, "#{event_models_path}/code_merge_request_event"
 end
