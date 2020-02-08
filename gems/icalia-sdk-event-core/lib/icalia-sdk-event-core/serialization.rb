@@ -22,8 +22,8 @@ module Icalia
              "#{serialization_path}/deserializable_property_resource"
 
     # Event deserialization
-    autoload :DeserializableResource,
-             "#{serialization_path}/deserializable_resource"
+    autoload :DeserializableMembershipEvent,
+             "#{serialization_path}/deserializable_membership_event"
 
     autoload :DeserializableOrganizationEvent,
              "#{serialization_path}/deserializable_organization_event"
@@ -32,12 +32,17 @@ module Icalia
              "#{serialization_path}/deserializable_oauth_access_token_event"
 
     # Deserializable Objects
+    autoload :DeserializableResource,
+             "#{serialization_path}/deserializable_resource"
 
     autoload :DeserializableEmailAccount,
              "#{serialization_path}/deserializable_email_account"
 
     autoload :DeserializableUser,
              "#{serialization_path}/deserializable_user"
+    
+    autoload :DeserializableMembership,
+             "#{serialization_path}/deserializable_membership"
 
     autoload :DeserializablePerson,
              "#{serialization_path}/deserializable_person"
