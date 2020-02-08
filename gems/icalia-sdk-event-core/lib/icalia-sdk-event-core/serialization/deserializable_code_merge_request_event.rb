@@ -6,8 +6,7 @@ module Icalia::Event
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia Event's `CodeMergeRequestEvent` object that can be used to create or
   # update a code-repository data
-  class DeserializableCodeMergeRequestEvent < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
+  class DeserializableCodeMergeRequestEvent < DeserializableResource
     include DeserializableResourceAction
 
     has_one :'merge-request' do |_rel, id, type|

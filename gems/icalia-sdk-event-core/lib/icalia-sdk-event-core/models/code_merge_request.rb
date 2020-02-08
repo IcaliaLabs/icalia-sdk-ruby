@@ -18,7 +18,7 @@ module Icalia
                 :deleted_line_count,
                 :changed_file_count
 
-    attr_reader :base, :head, :author, :committer
+    has_one :base, :head, :author, :committer
 
     def closed?; state == 'closed'; end
   end

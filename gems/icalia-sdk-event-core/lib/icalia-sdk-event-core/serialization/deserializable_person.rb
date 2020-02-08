@@ -5,24 +5,17 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia Event's `Person` object
-  class DeserializablePerson < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity
+  class DeserializablePerson < DeserializableResource
     include DeserializableResourceTimestamps
 
     attributes :name
 
-    has_many(:'email-accounts') do |_rel, ids, types|
-      Hash[
-        email_account_ids: ids,
-        email_account_types: types.map { |type| classify_type(type) }
-      ]
+    has_many(:'email-accounts') do |rel, _ids, _types|
+      Hash[email_accounts: get_stand_ins(rel)]
     end
 
-    has_many(:'cloud-identities') do |_rel, ids, types|
-      Hash[
-        cloud_identity_ids: ids,
-        cloud_identity_types: types.map { |type| classify_type(type) }
-      ]
+    has_many(:'cloud-identities') do |rel, _ids, _types|
+      Hash[cloud_identities: get_stand_ins(rel)]
     end
   end
 end
