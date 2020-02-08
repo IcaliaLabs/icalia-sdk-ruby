@@ -18,6 +18,7 @@ module Icalia
       object_attributes.each do |key, value|
         attribute_name = "#{key}".underscore
         next register_stand_in(attribute_name, value) if value.is_a? ModelProxy
+        next register_collection(attribute_name, value) if value.is_a? Array
         instance_variable_set("@#{attribute_name}", value)
       end
     end
@@ -39,6 +40,17 @@ module Icalia
     end
 
     private
+
+    def register_collection(association, collection)
+      instance_variable_set("@#{association}", collection)
+      collection.each_with_index do |item, index|
+        next unless item.is_a? ModelProxy
+        serialization_context.register_stand_in model: self,
+                                                index: index,
+                                                stand_in: item,
+                                                association: association
+      end
+    end
 
     def register_stand_in(association, stand_in)
       instance_variable_set("@#{association}", stand_in)
