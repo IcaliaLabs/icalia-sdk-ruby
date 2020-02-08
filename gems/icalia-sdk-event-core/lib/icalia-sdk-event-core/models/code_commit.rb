@@ -4,6 +4,6 @@ module Icalia
   class CodeCommit < ModelBase
     attr_reader :sha
 
-    attr_reader :repository
+    has_one :repository
   end
 end

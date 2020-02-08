@@ -9,6 +9,9 @@ module Icalia
 
     attr_reader :serialization_context
 
+    cattr_reader(:associated_resources) { [] }
+    cattr_reader(:associated_resource_collections) { [] }
+
     def initialize(object_attributes = {})
       @serialization_context = object_attributes.delete :serialization_context
       
@@ -16,6 +19,22 @@ module Icalia
         attribute_name = "#{key}".underscore
         next register_stand_in(attribute_name, value) if value.is_a? ModelProxy
         instance_variable_set("@#{attribute_name}", value)
+      end
+    end
+
+    class << self
+      def has_one(*associations)
+        associations.each do |association|
+          attr_reader association
+          associated_resources << association
+        end
+      end
+
+      def has_many(*associations)
+        associations.each do |association|
+          attr_reader association
+          associated_resource_collections << association
+        end
       end
     end
 
