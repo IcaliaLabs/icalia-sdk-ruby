@@ -6,7 +6,7 @@ module Icalia::Event
 
     included do
       has_one :owner do |_rel, id, type|
-        Hash[owner_id: id, owner_type: classify_type(type)]
+        Hash[owner: get_stand_in(id: id, type: classify_type(type))]
       end
     end
   end
