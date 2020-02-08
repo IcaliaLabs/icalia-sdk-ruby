@@ -5,7 +5,7 @@ module Icalia
   
   autoload :ModelBase, "#{models_path}/model_base"
   autoload :ModelProxy, "#{models_path}/model_proxy"
-
+  autoload :ModelCollectionProxy, "#{models_path}/model_collection_proxy"
 
   autoload :ResourceIdentity, "#{models_path}/resource_identity"
   autoload :ResourceAction, "#{models_path}/resource_action"
@@ -13,6 +13,7 @@ module Icalia
 
   # Core Models:
   autoload :Person, "#{models_path}/person"
+  autoload :Membership, "#{models_path}/membership"
   autoload :Organization, "#{models_path}/organization"
 
   autoload :CodeCommit, "#{models_path}/code_commit"
@@ -23,5 +24,6 @@ module Icalia
 
   # Event Models:
   event_models_path = "#{models_path}/events"
+  autoload :MembershipEvent, "#{event_models_path}/membership_event"
   autoload :CodeMergeRequestEvent, "#{event_models_path}/code_merge_request_event"
 end
