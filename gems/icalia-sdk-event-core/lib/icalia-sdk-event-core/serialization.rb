@@ -9,9 +9,6 @@ module Icalia
     autoload :Deserializer, "#{serialization_path}/deserializer"
 
     # Deserialization Modules:
-    autoload :DeserializableResourceIdentity,
-             "#{serialization_path}/deserializable_resource_identity"
-
     autoload :DeserializableResourceAction,
              "#{serialization_path}/deserializable_resource_action"
 
@@ -25,6 +22,8 @@ module Icalia
              "#{serialization_path}/deserializable_property_resource"
 
     # Event deserialization
+    autoload :DeserializableResource,
+             "#{serialization_path}/deserializable_resource"
 
     autoload :DeserializableMembershipEvent,
              "#{serialization_path}/deserializable_membership_event"

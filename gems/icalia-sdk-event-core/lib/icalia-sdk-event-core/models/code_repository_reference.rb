@@ -5,7 +5,7 @@ module Icalia
     include ResourceIdentity
     attr_reader :name, :label
 
-    attr_reader :commit
+    has_one :commit
 
     delegate :sha, :repository, to: :commit, allow_nil: true
   end

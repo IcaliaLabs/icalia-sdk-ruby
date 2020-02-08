@@ -5,9 +5,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation of an
   # Icalia `CodeCommitReference` object
-  class DeserializableCodeCommit < JSONAPI::Deserializable::Resource
-    include DeserializableResourceIdentity   # id and type
-
+  class DeserializableCodeCommit < DeserializableResource
     attributes :sha
 
     has_one(:repository) do |_rel, id, type|

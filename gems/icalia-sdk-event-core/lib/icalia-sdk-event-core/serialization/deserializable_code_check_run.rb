@@ -3,7 +3,7 @@ module Icalia::Event
   #
   # This class is responsible for converting a JSONAPI.org representation
   # of an Icalia Event's `CheckRun` object
-  class DeserializableCheckRun < JSONAPI::Deserializable::Resource
+  class DeserializableCheckRun < DeserializableResource
     include DeserializableResourceTimestamps
 
     id { |value| Hash[unique_id: value] }
