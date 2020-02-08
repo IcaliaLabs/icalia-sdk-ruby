@@ -8,5 +8,7 @@ module Icalia
                 :updated_at,
                 :name,
                 :identity_type
+
+    has_one :owner
   end
 end

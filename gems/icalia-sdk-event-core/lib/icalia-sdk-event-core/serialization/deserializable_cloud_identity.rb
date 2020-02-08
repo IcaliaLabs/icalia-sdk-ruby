@@ -10,11 +10,11 @@ module Icalia::Event
 
     attributes :name, :provider
 
-    attribute(:'identity-type') { |value| Hash[type: value] }
-    attribute(:'id-at-provider') { |value| Hash[uid: value.to_s] }
+    attribute(:'identity-type') { |value| Hash[identity_type: value] }
+    attribute(:'id-at-provider') { |value| Hash[id_at_provider: value.to_s] }
 
     has_one :owner do |_rel, id, type|
-      Hash[owner_id: id, owner_type: classify_type(type)]
+      Hash[owner: get_stand_in(id: id, type: classify_type(type))]
     end
   end
 end

@@ -32,7 +32,7 @@ module Icalia::Event
     end
 
     has_one :committer do |rel, id, type|
-      next Hash[committer: nil] unless rel[:data].present?
+      next Hash[committer: nil] unless rel[:data]
       
       stand_in = Icalia::ModelProxy.new id: id, type: classify_type(type)
       Hash[committer: stand_in]
