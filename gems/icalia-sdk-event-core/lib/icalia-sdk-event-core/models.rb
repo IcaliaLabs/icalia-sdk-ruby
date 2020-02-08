@@ -28,6 +28,7 @@ module Icalia
 
   # Event Models:
   event_models_path = "#{models_path}/events"
-  autoload :MembershipEvent, "#{event_models_path}/code_merge_request_event"
+  autoload :MembershipEvent, "#{event_models_path}/membership_event"
+  autoload :OrganizationEvent, "#{event_models_path}/organization_event"
   autoload :CodeMergeRequestEvent, "#{event_models_path}/code_merge_request_event"
 end
