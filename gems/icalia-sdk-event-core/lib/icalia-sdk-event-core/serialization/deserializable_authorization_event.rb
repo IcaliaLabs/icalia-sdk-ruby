@@ -7,10 +7,9 @@ module Icalia::Event
   # Icalia OAuth Access Token event
   class DeserializableOauthAccessTokenEvent < DeserializableResource
     include DeserializableResourceAction
-    include DeserializableResourceCreationTimestamp
 
     has_one :token do |_rel, id, type|
-      Hash[token_id: id, token_type: classify_type(type)]
+      Hash[token: get_stand_in(id: id, type: classify_type(type))]
     end
   end
 end
