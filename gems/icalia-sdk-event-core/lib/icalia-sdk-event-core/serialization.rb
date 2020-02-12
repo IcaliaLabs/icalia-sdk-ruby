@@ -50,7 +50,7 @@ module Icalia
     autoload :DeserializablePerson,
              "#{serialization_path}/deserializable_person"
 
-    autoload :DeserializableOauthAccessToken,
+    autoload :DeserializableOAuthAccessToken,
              "#{serialization_path}/deserializable_oauth_access_token"
 
     autoload :DeserializableOauthApplication,
