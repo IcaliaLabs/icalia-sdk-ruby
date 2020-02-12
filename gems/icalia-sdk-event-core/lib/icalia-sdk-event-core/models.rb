@@ -27,6 +27,7 @@ module Icalia
   autoload :CodeMergeRequest, "#{models_path}/code_merge_request"
 
   autoload :OAuthAccessToken, "#{models_path}/oauth_access_token"
+  autoload :AuthorizationEvent, "#{models_path}/authorization_event"
 
   # Event Models:
   event_models_path = "#{models_path}/events"

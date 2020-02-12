@@ -28,11 +28,11 @@ module Icalia
     autoload :DeserializableOrganizationEvent,
              "#{serialization_path}/deserializable_organization_event"
 
+    autoload :DeserializableAuthorizationEvent,
+             "#{serialization_path}/deserializable_authorization_event"
+
     autoload :DeserializableCodeMergeRequestEvent,
              "#{serialization_path}/deserializable_code_merge_request_event"
-
-    autoload :DeserializableOauthAccessTokenEvent,
-             "#{serialization_path}/deserializable_oauth_access_token_event"
 
     # Deserializable Objects
     autoload :DeserializableResource,
