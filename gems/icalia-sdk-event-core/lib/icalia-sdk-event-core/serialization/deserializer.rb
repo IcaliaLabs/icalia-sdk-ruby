@@ -91,7 +91,7 @@ module Icalia::Event
     end
 
     def deserialize_object_data(object_data)
-      object_class_name = object_data['type'].underscore.classify
+      object_class_name = object_data['type'].underscore.classify.gsub(/Oauth/, 'OAuth')
       object_class = "::Icalia::#{object_class_name}".safe_constantize
       return unless object_class
       
