@@ -7,31 +7,39 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  secrets:
+    - name: icalia-labs-semaphore-registry
+  prologue:
+    commands:
+      # Checkout the code:
+      - checkout
+
+      # Add the scripts for CI to the PATH:
+      - export PATH=$(pwd)/.semaphore/bin:${PATH}
+
+      # Generate the dotenv file:
+      - generate-dotenv-file > .env
+
+      # Alias docker-compose commands as 'ci-compose':
+      - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
+
+      # Log in to Semaphore CI Docker Registry:
+      - docker login -u "$SEMAPHORE_REGISTRY_USERNAME" -p "$SEMAPHORE_REGISTRY_PASSWORD" https://icalia-labs.registry-beta.semaphoreci.com
+      
+      # Pull the images referenced in the 'cache_from' key:
+      - docker-image-manager download-cache libraries
+
 blocks:
   - name: Build Test Image
     task:
-      secrets:
-        - name: AWS
-      prologue:
-        commands:
-          - checkout
-
-          # Add the scripts for CI to the PATH:
-          - export PATH=$(pwd)/.semaphore/bin:${PATH}
-
-          # Generate the dotenv file:
-          - generate-dotenv-file > .env
-
-          # Alias docker-compose commands as 'ci-compose':
-          - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
-
-          # Log in to AWS ECR:
-          - $(aws ecr get-login --no-include-email --region eu-central-1)
       jobs:
         - name: Build
           commands:
-            # Pull the images referenced in the 'cache_from' key:
-            - docker-image-manager download-cache libraries
 
             # Build the test image:
             - ci-compose build --pull libraries
@@ -41,34 +49,14 @@ blocks:
   
   - name: SDK Tests
     task:
-      secrets:
-        - name: AWS
-      prologue:
-        commands:
-          - checkout
-
-          # Add the scripts for CI to the PATH:
-          - export PATH=$(pwd)/.semaphore/bin:${PATH}
-
-          # Generate the dotenv file:
-          - generate-dotenv-file > .env
-
-          # Alias docker-compose commands as 'ci-compose':
-          - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
-
-          # Log in to AWS ECR:
-          - $(aws ecr get-login --no-include-email --region eu-central-1)
-          
-          # Pull the images referenced in the 'cache_from' key:
-          - docker-image-manager download-cache libraries
       jobs:
-        - name: Event Core
+        - name: Core
           commands:
             # Run the tests
-            - ci-compose run event_core rake spec
+            - ci-compose run core rake spec
             
             # Build the gem
-            - ci-compose run event_core gem build icalia-sdk-event-core
+            - ci-compose run core gem build icalia-sdk-event-core
         
         - name: Event Notification
           commands:

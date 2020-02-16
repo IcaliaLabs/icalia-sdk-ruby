@@ -11,9 +11,9 @@ services:
     working_dir: /usr/src
     entrypoint: /usr/src/bin/dev-entrypoint.sh
 
-  event_core:
+  core:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-core
+    working_dir: /usr/src/gems/icalia-sdk-core
 
   event_notification:
     <<: *library
