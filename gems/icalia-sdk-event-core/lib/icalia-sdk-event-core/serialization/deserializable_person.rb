@@ -8,7 +8,12 @@ module Icalia::Event
   class DeserializablePerson < DeserializableResource
     include DeserializableResourceTimestamps
 
-    attributes :name
+    attribute(:'full-name') { |value| Hash[full_name: value] }
+    attribute(:'given-name') { |value| Hash[given_name: value] }
+    attribute(:'family-name') { |value| Hash[family_name: value] }
+    attribute(:'gender-type') { |value| Hash[gender_type: value] }
+    attribute(:'custom-gender') { |value| Hash[custom_gender: value] }
+    attribute(:'date-of-birth') { |value| Hash[date_of_birth: value] }
 
     has_many(:'email-accounts') do |rel, _ids, _types|
       Hash[email_accounts: get_stand_ins(rel)]
