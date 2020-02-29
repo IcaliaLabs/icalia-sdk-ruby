@@ -28,7 +28,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jsonapi-deserializable (0.2.0)
     minitest (5.14.0)
-    rake (10.5.0)
+    rake (13.0.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -54,7 +54,7 @@ DEPENDENCIES
   bundler (~> 1.17)
   icalia-sdk-event-core!
   icalia-sdk-event-webhook!
-  rake (~> 10.0)
+  rake (~> 13.0)
   rspec (~> 3.0)
 
 BUNDLED WITH
