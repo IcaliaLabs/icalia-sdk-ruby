@@ -12,7 +12,9 @@
   "files.exclude": {
     ".bundle": true,
     ".devcontainer": true,
+    ".gitconfig": true,
     ".gnupg": true,
+    ".local": true,
     ".vscode-server": true,
     "**/.*_hist*": true,
     "**/.gem/": true

@@ -29,7 +29,7 @@
   // Sets the default path that VS Code should open when connecting to the
   // container (which is often the path to a volume mount where the source code
   // can be found in the container). Defaults to "/".
-  "workspaceFolder": "/usr/src/gems",
+  "workspaceFolder": "/usr/src",
 
   // An array of extension IDs that specify the extensions to install inside the
   // container when you first attach to it.
