@@ -56,3 +56,4 @@ docs/**/*.html
 /.gitconfig
 /.vscode-server
 /.gnupg
+/.solargraph

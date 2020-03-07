@@ -18,5 +18,6 @@
     ".vscode-server": true,
     "**/.*_hist*": true,
     "**/.gem/": true
-  }
+  },
+  "solargraph.useBundler": true
 }

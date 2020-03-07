@@ -26,6 +26,7 @@
 /.gitconfig
 /.vscode-server
 /.gnupg
+/.solargraph
 
 # Ignore temporary files
 tmp/*
