@@ -29,5 +29,6 @@ module Icalia
   autoload :MembershipEvent, 'icalia/models/events/membership_event'
   autoload :OrganizationEvent, 'icalia/models/events/organization_event'
   autoload :AuthorizationEvent, 'icalia/models/events/authorization_event'
+  autoload :CodeRepositoryEvent, 'icalia/models/events/code_repository_event'
   autoload :CodeMergeRequestEvent, 'icalia/models/events/code_merge_request_event'
 end
