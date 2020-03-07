@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+gem 'icalia-sdk-core', path: '../core'
+gem 'icalia-sdk-event-notification', path: '../event-notification'
+gem 'icalia-sdk-event-webhook', path: '../event-webhook'
+gem 'icalia-sdk-event', path: '../event'
+
+# Specify your gem's dependencies in icalia-sdk.gemspec
+gemspec
