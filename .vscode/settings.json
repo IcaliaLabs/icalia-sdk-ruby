@@ -8,5 +8,9 @@
     "editor.tabSize": 2
   },
   "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "files.exclude": {
+    "**/.*_hist*": true,
+    "**/.bundle": true
+  }
 }
