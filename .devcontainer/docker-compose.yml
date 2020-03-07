@@ -1,0 +1,47 @@
+version: "3.7"
+
+volumes:
+  icalia_sdk_gem_bundle:
+  icalia_sdk_vs_code_server:
+
+services:
+  libraries: &app_config
+    build:
+      context: .
+      target: development
+      args:
+        DEVELOPER_UID: ${UID:-1000}
+        DEVELOPER_USERNAME: ${USER:-you}
+    image: icalialabs/icalia-sdk:development
+    working_dir: /usr/src
+    volumes:
+      - .:/usr/src # Mount the whole workspace directory
+      - ~/.gitconfig:/usr/src/.gitconfig:ro
+      - ~/.gnupg:/usr/src/.gnupg:ro
+      - icalia_sdk_gem_bundle:/usr/local/bundle
+      - icalia_sdk_vs_code_server:/usr/src/.vscode-server
+    stdin_open: true
+    tty: true
+
+    depends_on:
+      - pubsub
+
+    # [Optional] Required for ptrace-based debuggers like C++, Go, and Rust
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+    environment:
+      # Use the local pubsub emulator instead of Google Cloud:
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+
+      # Google Cloud variables:
+      GOOGLE_CLOUD_PROJECT: ${ICALIA_SDK_GOOGLE_CLOUD_PROJECT:-example-gcp-project-id}
+      GOOGLE_CLOUD_CREDENTIALS: /usr/src/google-cloud-credentials.json
+
+      VSCODE_CONTEXT: "yes"
+      DEBIAN_FRONTEND: dialog

@@ -20,6 +20,7 @@ log/*.log
 # 3: Ignore Development container's Home artifacts:
 # 3.1: Ignore bash / IRB / Byebug history files
 .*_hist*
+.local/*
 
 # 3.3: bundler stuff
 .bundle/*
@@ -50,3 +51,8 @@ docs/**/*.html
 **/.gem
 /.semaphore
 /tmp
+
+# Ignore VSCode Remote Container generated stuff:
+/.gitconfig
+/.vscode-server
+/.gnupg
