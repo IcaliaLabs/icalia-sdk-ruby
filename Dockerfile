@@ -4,6 +4,9 @@ WORKDIR /usr/src/gems
 
 ENV HOME=/usr/src PATH=/usr/src/bin:$PATH
 
+COPY Gemfile Gemfile.lock /usr/src/
+RUN bundle install --jobs=4 --retry=3
+
 # Copy all files required to run "bundle install":
 # Copy the SDK core library dependency files:
 COPY gems/core/Gemfile \

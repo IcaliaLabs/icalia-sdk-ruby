@@ -11,6 +11,7 @@
   "files.trimFinalNewlines": true,
   "files.exclude": {
     "**/.*_hist*": true,
-    "**/.bundle": true
+    "**/.bundle": true,
+    "**/.gem/": true
   }
 }
