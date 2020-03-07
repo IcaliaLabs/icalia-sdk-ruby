@@ -56,7 +56,7 @@ blocks:
             - ci-compose run core rake spec
             
             # Build the gem
-            - ci-compose run core gem build icalia-sdk-event-core
+            - ci-compose run core gem build icalia-sdk-core
         
         - name: Event Notification
           commands:
@@ -77,18 +77,18 @@ blocks:
         - name: Event Meta
           commands:
             # Run the tests
-            - ci-compose run event_meta rake spec
+            - ci-compose run event rake spec
             
             # Build the gem
-            - ci-compose run event_meta gem build icalia-sdk-event
+            - ci-compose run event gem build icalia-sdk-event
         
         - name: SDK Meta
           commands:
             # Run the tests
-            - ci-compose run sdk_meta rake spec
+            - ci-compose run sdk rake spec
             
             # Build the gem
-            - ci-compose run sdk_meta gem build icalia-sdk
+            - ci-compose run sdk gem build icalia-sdk
 
 promotions:
   - name: Publish

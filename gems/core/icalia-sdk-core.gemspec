@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'icalia/core'
+require 'icalia-sdk-core/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "icalia-sdk-core"
-  spec.version       = Icalia::Core::VERSION
+  spec.name          = 'icalia-sdk-core'
+  spec.version       = Icalia::SDK::Core::VERSION
   spec.authors       = ['Roberto Quintanilla']
   spec.email         = %w[vov@icalialabs.com]
 

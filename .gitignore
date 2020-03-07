@@ -16,3 +16,6 @@
 # Ignore dotenv files:
 **/*.env
 !**/*example.env
+
+# Ignore Bundler caching:
+.bundle

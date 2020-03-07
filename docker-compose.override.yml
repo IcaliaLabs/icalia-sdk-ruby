@@ -8,25 +8,24 @@ services:
       target: development
     volumes:
       - .:/usr/src
-    working_dir: /usr/src
     entrypoint: /usr/src/bin/dev-entrypoint.sh
 
   core:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-core
+    working_dir: /usr/src/gems/core
 
   event_notification:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-notification
+    working_dir: /usr/src/gems/event-notification
   
   event_webhook:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-webhook
+    working_dir: /usr/src/gems/event-webhook
   
-  event_meta:
+  event:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event
+    working_dir: /usr/src/gems/event
   
-  sdk_meta:
+  sdk:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk
+    working_dir: /usr/src/gems/sdk
