@@ -13,7 +13,7 @@ services:
         DEVELOPER_UID: ${UID:-1000}
         DEVELOPER_USERNAME: ${USER:-you}
     image: icalialabs/icalia-sdk:development
-    working_dir: /usr/src/gems
+    working_dir: /usr/src
     volumes:
       - .:/usr/src # Mount the whole workspace directory
       - ~/.gitconfig:/usr/src/.gitconfig:ro
