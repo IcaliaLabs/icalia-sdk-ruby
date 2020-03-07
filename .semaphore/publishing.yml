@@ -60,9 +60,9 @@ blocks:
         - name: Event Meta
           commands:
             # Build & publish the gem
-            - ci-compose run event rake release
+            - ci-compose run event_meta rake release
 
         - name: SDK Meta
           commands:
             # Build & publish the gem
-            - ci-compose run sdk rake release
+            - ci-compose run sdk_meta rake release

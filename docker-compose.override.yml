@@ -24,13 +24,13 @@ services:
     <<: *library
     working_dir: /usr/src/event-webhook
   
-  event:
+  event_meta:
     <<: *library
     depends_on:
       - pubsub
     working_dir: /usr/src/event
   
-  sdk:
+  sdk_meta:
     <<: *library
     depends_on:
       - pubsub

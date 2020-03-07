@@ -32,10 +32,10 @@ services:
     <<: *library
     working_dir: /usr/src/event-webhook
 
-  event:
+  event_meta:
     <<: *library
     working_dir: /usr/src/event
 
-  sdk:
+  sdk_meta:
     <<: *library
     working_dir: /usr/src/sdk
