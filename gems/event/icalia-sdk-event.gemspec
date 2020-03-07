@@ -5,7 +5,7 @@ require 'icalia-sdk-event/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'icalia-sdk-event'
-  spec.version       = Icalia::Event::VERSION
+  spec.version       = Icalia::SDK::EVENT_VERSION
   spec.authors       = ['Roberto Quintanilla']
   spec.email         = %w[vov@icalialabs.com]
 
@@ -37,8 +37,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = %w[lib]
 
-  spec.add_dependency 'icalia-sdk-event-webhook', Icalia::Event::VERSION
-  spec.add_dependency 'icalia-sdk-event-notification', Icalia::Event::VERSION
+  spec.add_dependency 'icalia-sdk-event-webhook', Icalia::SDK::EVENT_VERSION
+  spec.add_dependency 'icalia-sdk-event-notification',
+                      Icalia::SDK::EVENT_VERSION
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'

@@ -2,4 +2,3 @@
 
 require 'icalia-sdk-event-notification'
 require 'icalia-sdk-event-webhook'
-require 'icalia-sdk-event/version'
