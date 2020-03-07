@@ -8,17 +8,17 @@ jobs:
     name: Test Gems
     runs-on: ubuntu-latest
     steps:
-      - name: Test event-core
-        run: docker-compose run event_core rake spec
+      - name: Test core
+        run: docker-compose -f ../docker-compose.yml -f ../docker-compose.override.yml run core rake spec
       
       - name: Test event-notification
-        run: docker-compose run event_notification rake spec
+        run: docker-compose -f ../docker-compose.yml -f ../docker-compose.override.yml run event_notification rake spec
       
       - name: Test event-webhook
-        run: docker-compose run event_webhook rake spec
+        run: docker-compose -f ../docker-compose.yml -f ../docker-compose.override.yml run event_webhook rake spec
       
       - name: Test event meta library
-        run: docker-compose run event_meta rake spec
+        run: docker-compose -f ../docker-compose.yml -f ../docker-compose.override.yml run event_meta rake spec
       
       - name: Test SDK meta library
-        run: docker-compose run sdk_meta rake spec
+        run: docker-compose -f ../docker-compose.yml -f ../docker-compose.override.yml run sdk_meta rake spec
