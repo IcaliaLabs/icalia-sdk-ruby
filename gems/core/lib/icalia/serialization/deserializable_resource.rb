@@ -27,7 +27,7 @@ module Icalia
 
       def get_stand_ins(rel)
         if rel['data'].nil?
-          Icalia::Event::ModelCollectionProxy.new rel['links']
+          Icalia::ModelCollectionProxy.new rel['links']
         else
           rel['data'].map do |data|
             get_stand_in id: data['id'], type: classify_data(data)

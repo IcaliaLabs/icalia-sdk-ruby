@@ -18,7 +18,7 @@ module Icalia::Event
 
     def perform(message)
       raw_data = MessagePack.unpack(message.data)
-      event = Icalia::Event::Deserializer.new(raw_data).perform
+      event = Icalia::Deserializer.new(raw_data).perform
       event_class_name = event.class.name.demodulize
 
       if (processor_class = processor_map[event_class_name])
