@@ -6,15 +6,14 @@ require 'icalia-sdk-event-notification/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'icalia-sdk-event-notification'
-  spec.version     = Icalia::Event::NOTIFICATION_VERSION
+  spec.version     = Icalia::SDK::EVENT_NOTIFICATION_VERSION
   spec.authors     = ['Roberto Quintanilla']
   spec.email       = %w[vov@icalialabs.com]
 
-  spec.summary     = 'Icalia SDK Events for Ruby - via AWS Simple Notification'\
-                     ' Service'
-  spec.description = 'Official Ruby gem for Icalia Events via AWS Simple '\
-                     'Notification Service. This gem is part of the Icalia SDK'\
-                     ' for Ruby.'
+  spec.summary     = 'Icalia SDK Event Notification for Ruby'
+  spec.description = 'Official Ruby gem for Icalia Event Notification via '\
+                     'Google Cloud Pub/Sub Service. This gem is part of the '\
+                     'Icalia SDK for Ruby.'
   spec.homepage    = 'https://github.com/IcaliaLabs/icalia-sdk-ruby'
   spec.license     = 'MIT'
 
@@ -41,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = %w[lib]
 
-  spec.add_dependency 'icalia-sdk-core', Icalia::Event::NOTIFICATION_VERSION
+  spec.add_dependency 'icalia-sdk-core', Icalia::SDK::EVENT_NOTIFICATION_VERSION
 
   # We require mattr_reader to be able to accept a `default` value, which is
   # only supported on Rails ActiveSupport >= 5.2.0:
