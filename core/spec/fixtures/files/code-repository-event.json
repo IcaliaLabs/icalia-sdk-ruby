@@ -1,0 +1,149 @@
+{
+  "data": {
+    "id": "362bef24-4149-40a1-8aa3-11fd791ce1f4",
+    "type": "code-repository-event",
+    "attributes": {
+      "timestamp": "2020-03-07T17:40:02.398Z",
+      "action": "created"
+    },
+    "relationships": {
+      "actor": {
+        "data": {
+          "id": "456a2f79-324a-42eb-9144-34f8795c0799",
+          "type": "person"
+        }
+      },
+      "repository": {
+        "data": {
+          "id": "949c8a7f-859e-4f08-9d4f-b0d8dc52c160",
+          "type": "code-repository"
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "456a2f79-324a-42eb-9144-34f8795c0799",
+      "type": "person",
+      "attributes": {
+        "given_name": "Codertocat",
+        "created-at": "2017-03-27T02:15:55.541Z",
+        "updated-at": "2020-02-07T20:39:33.684Z"
+      },
+      "relationships": {
+        "cloud-identities": {
+          "data": [
+            {
+              "type": "cloud-identity",
+              "id": "9b31f1d5-c64d-4b4c-a030-5f545cfc49fe"
+            }
+          ]
+        },
+        "email-accounts": {
+          "data": [
+            {
+              "type": "email-account",
+              "id": "89f24ccd-8e08-4f2b-9bbb-496f0342ab73"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "949c8a7f-859e-4f08-9d4f-b0d8dc52c160",
+      "type": "code-repository",
+      "attributes": {
+        "provider": "github",
+        "id-at-provider": "239688741",
+        "created-at": "2020-02-11T06:04:26.000Z",
+        "updated-at": "2020-02-11T06:04:26.000Z",
+        "name": "Hello-World",
+        "description": "",
+        "full-name": "Codertocat/Hello-World",
+        "url": "https://github.com/Codertocat/Hello-World.git",
+        "html-url": "https://github.com/Codertocat/Hello-World",
+        "fork": false,
+        "private": false,
+        "exists": true,
+        "archived": false,
+        "default-branch": "master"
+      },
+      "relationships": {
+        "owner": {
+          "data": {
+            "type": "organization",
+            "id": "f9a0fbff-d79b-444e-a6ba-7a3b6504f4d4"
+          }
+        },
+        "installations": {
+          "meta": {
+            "included": false
+          }
+        }
+      }
+    },
+    {
+      "id": "9b31f1d5-c64d-4b4c-a030-5f545cfc49fe",
+      "type": "cloud-identity",
+      "attributes": {
+        "provider": "github",
+        "id-at-provider": "21031067",
+        "created-at": "2017-03-27T02:16:47.599Z",
+        "updated-at": "2017-03-27T02:16:47.599Z",
+        "name": "Codertocat",
+        "identity-type": "User"
+      },
+      "relationships": {
+        "owner": {
+          "data": {
+            "id": "456a2f79-324a-42eb-9144-34f8795c0799",
+            "type": "person"
+          }
+        }
+      }
+    },
+    {
+      "id": "89f24ccd-8e08-4f2b-9bbb-496f0342ab73",
+      "type": "email-account",
+      "attributes": {
+        "address": "codertocat@example.com",
+        "created-at": "2017-03-27T02:15:55.541Z"
+      },
+      "relationships": {
+        "owner": {
+          "data": {
+            "id": "456a2f79-324a-42eb-9144-34f8795c0799",
+            "type": "person"
+          }
+        }
+      }
+    },
+    {
+      "id": "f9a0fbff-d79b-444e-a6ba-7a3b6504f4d4",
+      "type": "organization",
+      "attributes": {
+        "created-at": "2017-03-27T02:21:00.111Z",
+        "updated-at": "2017-03-27T02:21:00.111Z",
+        "name": "IcaliaLabs"
+      },
+      "relationships": {
+        "cloud-identities": {
+          "data": [
+            {
+              "type": "cloud-identity",
+              "id": "f9a0fbff-d79b-444e-a6ba-7a3b6504f4d4"
+            }
+          ]
+        },
+        "email-accounts": {
+          "meta": {
+            "included": false
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "emitter": "cthulhu"
+  }
+}
