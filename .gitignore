@@ -26,3 +26,6 @@
 /.gitconfig
 /.vscode-server
 /.gnupg
+
+# Ignore temporary files
+tmp/*
