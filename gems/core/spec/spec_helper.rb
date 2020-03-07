@@ -1,5 +1,5 @@
-require "bundler/setup"
-require "icalia/sdk/core"
+require 'bundler/setup'
+require 'icalia-sdk-core'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

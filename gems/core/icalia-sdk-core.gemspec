@@ -5,7 +5,7 @@ require 'icalia-sdk-core/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'icalia-sdk-core'
-  spec.version       = Icalia::SDK::Core::VERSION
+  spec.version       = Icalia::SDK::CORE_VERSION
   spec.authors       = ['Roberto Quintanilla']
   spec.email         = %w[vov@icalialabs.com]
 
