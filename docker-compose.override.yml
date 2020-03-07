@@ -16,6 +16,8 @@ services:
 
   event_notification:
     <<: *library
+    depends_on:
+      - pubsub
     working_dir: /usr/src/gems/event-notification
   
   event_webhook:
@@ -24,8 +26,12 @@ services:
   
   event:
     <<: *library
+    depends_on:
+      - pubsub
     working_dir: /usr/src/gems/event
   
   sdk:
     <<: *library
+    depends_on:
+      - pubsub
     working_dir: /usr/src/gems/sdk
