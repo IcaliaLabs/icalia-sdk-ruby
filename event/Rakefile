@@ -7,12 +7,12 @@ RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
 
-desc "Build icalia-sdk-event-#{Icalia::Event::VERSION}.gem"
+desc "Build icalia-sdk-event-#{Icalia::SDK::EVENT_VERSION}.gem"
 task :build do
   system 'gem build icalia-sdk-event.gemspec'
 end
 
-desc "Build and push icalia-sdk-event-#{Icalia::Event::VERSION}.gem"
+desc "Build and push icalia-sdk-event-#{Icalia::SDK::EVENT_VERSION}.gem"
 task release: :build do
-  system "gem push icalia-sdk-event-#{Icalia::Event::VERSION}.gem"
+  system "gem push icalia-sdk-event-#{Icalia::SDK::EVENT_VERSION}.gem"
 end

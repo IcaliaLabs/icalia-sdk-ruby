@@ -7,12 +7,12 @@ RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
 
-desc "Build icalia-sdk-event-webhook-#{Icalia::Event::WEBHOOK_VERSION}.gem"
+desc "Build icalia-sdk-event-webhook-#{Icalia::SDK::EVENT_WEBHOOK_VERSION}.gem"
 task :build do
   system 'gem build icalia-sdk-event-webhook.gemspec'
 end
 
-desc "Build and push icalia-sdk-event-webhook-#{Icalia::Event::WEBHOOK_VERSION}.gem"
+desc "Build and push icalia-sdk-event-webhook-#{Icalia::SDK::EVENT_WEBHOOK_VERSION}.gem"
 task release: :build do
-  system "gem push icalia-sdk-event-webhook-#{Icalia::Event::WEBHOOK_VERSION}.gem"
+  system "gem push icalia-sdk-event-webhook-#{Icalia::SDK::EVENT_WEBHOOK_VERSION}.gem"
 end
