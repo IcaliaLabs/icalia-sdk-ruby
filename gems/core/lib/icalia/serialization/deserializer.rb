@@ -95,7 +95,7 @@ module Icalia
       object_class = "::Icalia::#{object_class_name}".safe_constantize
       return unless object_class
       
-      deserializer_class = "::Icalia::Event::Deserializable#{object_class_name}".safe_constantize
+      deserializer_class = "::Icalia::Deserializable#{object_class_name}".safe_constantize
       return unless deserializer_class
       
       object_attributes = deserializer_class
