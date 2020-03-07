@@ -22,20 +22,20 @@ services:
 
   core:
     <<: *library
-    working_dir: /usr/src/gems/core
+    working_dir: /usr/src/core
 
   event_notification:
     <<: *library
-    working_dir: /usr/src/gems/event-notification
+    working_dir: /usr/src/event-notification
 
   event_webhook:
     <<: *library
-    working_dir: /usr/src/gems/event-webhook
+    working_dir: /usr/src/event-webhook
 
   event:
     <<: *library
-    working_dir: /usr/src/gems/event
+    working_dir: /usr/src/event
 
   sdk:
     <<: *library
-    working_dir: /usr/src/gems/sdk
+    working_dir: /usr/src/sdk
