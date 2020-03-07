@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 group :development do
+  gem 'byebug', '~> 11.1', '>= 11.1.1'
+  gem 'pry', '~> 0.12.2'
+
   # RUby IDE tools:
   gem 'debase', '~> 0.2.4.1'
   gem 'ruby-debug-ide', '~> 0.7.0'

@@ -10,8 +10,11 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.exclude": {
+    ".bundle": true,
+    ".devcontainer": true,
+    ".gnupg": true,
+    ".vscode-server": true,
     "**/.*_hist*": true,
-    "**/.bundle": true,
     "**/.gem/": true
   }
 }

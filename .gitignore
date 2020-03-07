@@ -1,6 +1,7 @@
 # Ignore history files:
 
 **/.*_hist*
+.local/share/pry/pry_history
 
 # Ignore builds:
 **/icalia-sdk*.gem
@@ -18,4 +19,10 @@
 !**/*example.env
 
 # Ignore Bundler caching:
-.bundle
+.bundle/*
+!.bundle/config
+
+# Ignore VSCode Remote Container generated stuff:
+/.gitconfig
+/.vscode-server
+/.gnupg
