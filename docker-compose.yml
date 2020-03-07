@@ -1,19 +1,8 @@
 version: '3.7'
 
-networks:
-  backend:
-
 services:
-  # Emulates AWS SNS and SQS - see https://github.com/p4tin/goaws
-  goaws:
-    image: pafortin/goaws
+  # Emulates the Google PubSub service
+  pubsub:
+    image: vovimayhem/google-pubsub-emulator:latest
     ports:
-      - ${ICALIA_SDK_SNS_PORT:-4100}:4100
-    volumes: [ './goaws-config.yaml:/conf/goaws.yaml' ]
-    networks:
-      backend:
-        aliases:
-          - sqs.goaws
-          - sns.goaws
-          - sqs.us-west-2.goaws
-          - sns.us-west-2.goaws
+      - ${ICALIA_SDK_PUBSUB_PORT:-8085}:8085
