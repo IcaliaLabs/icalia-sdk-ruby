@@ -5,7 +5,7 @@ require 'icalia-sdk/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'icalia-sdk'
-  spec.version       = Icalia::VERSION
+  spec.version       = Icalia::SDK::META_VERSION
   spec.authors       = ['Roberto Quintanilla']
   spec.email         = %w[vov@icalialabs.com]
 
@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = %w[lib]
 
-  spec.add_dependency 'icalia-sdk-event', Icalia::VERSION
+  spec.add_dependency 'icalia-sdk-event', Icalia::SDK::META_VERSION
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'
