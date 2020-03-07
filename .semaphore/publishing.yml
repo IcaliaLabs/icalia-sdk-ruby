@@ -7,39 +7,45 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  secrets:
+    - name: icalia-labs-semaphore-registry
+    - name: ICALIA_RUBYGEMS
+  prologue:
+    commands:
+      # Checkout the code:
+      - checkout
+
+      # Correct the permissions on rubygems credentials:
+      - chmod 0600 /home/semaphore/.gem/credentials
+
+      # Add the scripts for CI to the PATH:
+      - export PATH=$(pwd)/.semaphore/bin:${PATH}
+
+      # Generate the dotenv file:
+      - generate-dotenv-file > .env
+
+      # Alias docker-compose commands as 'ci-compose':
+      - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
+
+      # Log in to Semaphore CI Docker Registry:
+      - docker login -u "$SEMAPHORE_REGISTRY_USERNAME" -p "$SEMAPHORE_REGISTRY_PASSWORD" https://icalia-labs.registry-beta.semaphoreci.com
+      
+      # Pull the images referenced in the 'cache_from' key:
+      - docker-image-manager download-cache libraries
+
 blocks:
   - name: Publish to Rubygems
     task:
-      secrets:
-        - name: AWS
-        - name: ICALIA_RUBYGEMS
-      prologue:
-        commands:
-          - checkout
-
-          # Correct the permissions on rubygems credentials:
-          - chmod 0600 /home/semaphore/.gem/credentials
-
-          # Add the scripts for CI to the PATH:
-          - export PATH=$(pwd)/.semaphore/bin:${PATH}
-
-          # Generate the dotenv file:
-          - generate-dotenv-file > .env
-
-          # Alias docker-compose commands as 'ci-compose':
-          - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
-
-          # Log in to AWS ECR:
-          - $(aws ecr get-login --no-include-email --region eu-central-1)
-
-          # Pull the images referenced in the 'cache_from' key:
-          - docker-image-manager download-cache libraries
-
       jobs:
-        - name: Event Core
+        - name: Core
           commands:
             # Build & publish the gem
-            - ci-compose run event_core rake release
+            - ci-compose run core rake release
 
         - name: Event Notification
           commands:
@@ -54,9 +60,9 @@ blocks:
         - name: Event Meta
           commands:
             # Build & publish the gem
-            - ci-compose run event_meta rake release
+            - ci-compose run event rake release
 
         - name: SDK Meta
           commands:
             # Build & publish the gem
-            - ci-compose run sdk_meta rake release
+            - ci-compose run sdk rake release

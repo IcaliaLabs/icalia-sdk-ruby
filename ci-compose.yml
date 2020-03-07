@@ -4,7 +4,7 @@ version: '3.7'
 
 services:
   libraries: &library
-    image: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${GIT_SHORT_SHA:-latest}
+    image: icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing-${GIT_COMMIT_SHORT_SHA:-latest}
     build:
       target: testing
       context: .
@@ -13,29 +13,29 @@ services:
         # stage, and this project's dev stages and runtime stages start from
         # different images, we need to include the releaseable image here as well
         # - this may change with Docker 19.x:
-        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${GIT_SHORT_SHA:-latest}
-        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing-${TAG_SAFE_BRANCH}
-        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalia-sdk-ruby:testing
+        - icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing-${GIT_COMMIT_SHORT_SHA:-latest}
+        - icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing-${TAG_SAFE_BRANCH}
+        - icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing
     command: bundle exec rake spec
     volumes:
       - ${HOME}/.gem/credentials:/root/.gem/credentials
 
-  event_core:
+  core:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-core
+    working_dir: /usr/src/core
 
   event_notification:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-notification
+    working_dir: /usr/src/event-notification
 
   event_webhook:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event-webhook
+    working_dir: /usr/src/event-webhook
 
-  event_meta:
+  event:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk-event
+    working_dir: /usr/src/event
 
-  sdk_meta:
+  sdk:
     <<: *library
-    working_dir: /usr/src/gems/icalia-sdk
+    working_dir: /usr/src/sdk
