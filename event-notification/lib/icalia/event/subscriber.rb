@@ -43,7 +43,7 @@ module Icalia::Event
         "-#{topic_name}"
       end
 
-      def ensure_subscription_exists
+      def auto_subscribe
         client = Subserver::Pubsub.client
         topic = client.topic(topic_name) || client.create_topic(topic_name)
 
