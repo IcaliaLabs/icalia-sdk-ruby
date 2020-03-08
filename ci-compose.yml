@@ -18,7 +18,7 @@ services:
         - icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing
     command: bundle exec rake spec
     volumes:
-      - ${HOME}/.gem/credentials:/root/.gem/credentials
+      - ${HOME}/.gem/credentials:/usr/src/.gem/credentials:ro
 
   core:
     <<: *library
