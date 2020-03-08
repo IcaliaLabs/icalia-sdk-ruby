@@ -2,6 +2,6 @@
 
 module Icalia
   module SDK
-    CORE_VERSION = '0.3.5'
+    CORE_VERSION = '0.3.6'
   end
 end
