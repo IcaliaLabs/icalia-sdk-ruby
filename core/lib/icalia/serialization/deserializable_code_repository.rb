@@ -7,7 +7,7 @@ module Icalia
   # Icalia Event's `CodeRepository` object
   class DeserializableCodeRepository < DeserializableResource
     include DeserializablePropertyResource   # has one owner
-    include DeserializableResourceCreationTimestamp
+    include DeserializableResourceTimestamps
 
     attributes :name, :private, :fork, :provider, :description, :url, :fork,
                :exists, :archived
