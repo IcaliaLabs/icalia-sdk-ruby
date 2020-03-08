@@ -37,10 +37,7 @@ module Icalia::Event
       end
 
       def subscription_name
-        Rails.application.class.module_parent_name.underscore +
-        '-' +
-        ENV.fetch('DEPLOYMENT_NAME', Rails.env).downcase +
-        "-#{topic_name}"
+        "#{subscription_name_prefix}-#{topic_name}"
       end
 
       def auto_subscribe
@@ -48,13 +45,37 @@ module Icalia::Event
         topic = client.topic(topic_name) || client.create_topic(topic_name)
 
         topic.subscription(subscription_name) ||
-        topic.subscribe(subscription_name)
+          topic.subscribe(subscription_name)
       end
 
       def process(event_class_name, options = {})
-        processor = options.delete :with
-        return unless processor.present?
+        return unless (processor = options.delete(:with)).present?
+
         processor_map[event_class_name] = processor
+      end
+
+      protected
+
+      def subscription_name_prefix
+        "#{rails_app_name.underscore}-#{deployment_name.underscore}"
+      end
+
+      def deployment_name
+        ENV.fetch('DEPLOYMENT_NAME', Rails.env)
+      end
+
+      def rails_app_name
+        return rails_app_name_since_rails_six if Rails.version.starts_with?('6')
+
+        rails_app_name_until_rails_six
+      end
+
+      def rails_app_name_until_rails_six
+        Rails.application.class.parent_name
+      end
+
+      def rails_app_name_since_rails_six
+        Rails.application.class.module_parent_name
       end
     end
   end
