@@ -30,3 +30,6 @@
 
 # Ignore temporary files
 tmp/*
+
+# Ignore gem builds
+**/pkg/*.gem
