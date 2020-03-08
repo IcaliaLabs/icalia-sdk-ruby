@@ -3,4 +3,9 @@ require "rspec/core/rake_task"
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task default: :spec
+
+# Override the :release task to skip the release:guard_clean and 
+# release:source_control_push tasks, which are not feasible in our CI/CD
+# context:
+task :release, [:remote] => %w[build release:rubygem_push]
