@@ -10,7 +10,6 @@ module Icalia
   module Event
     autoload :Publisher, 'icalia/event/publisher'
     autoload :Subscriber, 'icalia/event/subscriber'
-    autoload :Notification, 'icalia/event/notification'
     autoload :TopicMessageProcessing, 'icalia/event/topic_message_processing'
 
     mattr_reader :deferred_publishing, default: true
