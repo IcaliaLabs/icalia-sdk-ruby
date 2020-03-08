@@ -37,7 +37,7 @@ module Icalia::Event
       end
 
       def subscription_name
-        Rails.application.class.module_parent_name.underscore +
+        rails_app_name.underscore +
         '-' +
         ENV.fetch('DEPLOYMENT_NAME', Rails.env).downcase +
         "-#{topic_name}"
@@ -55,6 +55,22 @@ module Icalia::Event
         processor = options.delete :with
         return unless processor.present?
         processor_map[event_class_name] = processor
+      end
+
+      protected
+
+      def rails_app_name
+        return rails_app_name_since_rails_six if Rails.version.starts_with?('6')
+
+        rails_app_name_until_rails_six
+      end
+
+      def rails_app_name_until_rails_six
+        Rails.application.class.parent_name
+      end
+
+      def rails_app_name_since_rails_six
+        Rails.application.class.module_parent_name
       end
     end
   end
