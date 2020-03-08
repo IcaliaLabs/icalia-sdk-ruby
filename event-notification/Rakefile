@@ -1,18 +1,12 @@
-$LOAD_PATH.unshift File.expand_path('./lib', __dir__)
-
+require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
-require 'icalia-sdk-event-notification/version'
 
 RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
 
-desc "Build icalia-sdk-event-notification-#{Icalia::SDK::EVENT_NOTIFICATION_VERSION}.gem"
-task :build do
-  system 'gem build icalia-sdk-event-notification.gemspec'
-end
-
-desc "Build and push icalia-sdk-event-notification-#{Icalia::SDK::EVENT_NOTIFICATION_VERSION}.gem"
-task release: :build do
-  system "gem push icalia-sdk-event-notification-#{Icalia::SDK::EVENT_NOTIFICATION_VERSION}.gem"
-end
+# Override the :release task to skip the release:guard_clean and 
+# release:source_control_push tasks, which are not feasible in our CI/CD
+# context:
+Rake::Task['release'].clear
+task :release, %i[remote] => %w[build release:rubygem_push]
