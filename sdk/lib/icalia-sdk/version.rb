@@ -2,6 +2,6 @@
 
 module Icalia
   module SDK
-    META_VERSION = '0.3.6'
+    META_VERSION = '0.3.7'
   end
 end
