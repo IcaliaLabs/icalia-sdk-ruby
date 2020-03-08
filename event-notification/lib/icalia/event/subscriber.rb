@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'icalia-sdk-event-core'
+require 'icalia-sdk-core'
 
 module Icalia::Event
   module Subscriber
