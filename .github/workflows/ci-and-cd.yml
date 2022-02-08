@@ -130,6 +130,8 @@ jobs:
       - build_event_webhook
       - build_event_meta
       - build_sdk_meta
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
     steps:
       - name: Restore builds
         uses: actions/download-artifact@v2.1.0
@@ -146,3 +148,6 @@ jobs:
         uses: ruby/setup-ruby@v1.97.0
         with:
           ruby-version: "2.7"
+
+      - name: Try to publish
+        run: gem push core/pkg/icalia-sdk-*.gem
