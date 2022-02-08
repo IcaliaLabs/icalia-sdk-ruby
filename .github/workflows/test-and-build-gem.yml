@@ -51,3 +51,6 @@ jobs:
 
       - name: Build Gem
         run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build
+
+      - name: List pkg directory
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build ls -lah pkg
