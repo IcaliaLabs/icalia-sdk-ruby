@@ -54,3 +54,10 @@ jobs:
 
       - name: List pkg directory
         run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build ls -lah pkg
+
+      - name: Persist Built Gem
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: built-gems
+          path: "**/pkg/*.gem"
+          retention-days: 1
