@@ -68,55 +68,55 @@ jobs:
 
   run_core_tests:
     name: Core
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@122176019d357a02c9f3631243eb440dc996948f
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@8f40ba4dc66ab6f6db20efeea157b5a2e4dad684
     needs:
       - build_test_image
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: core_tests
+      service-name-base: core
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_notification_tests:
     name: Event Notification
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@122176019d357a02c9f3631243eb440dc996948f
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@8f40ba4dc66ab6f6db20efeea157b5a2e4dad684
     needs:
       - build_test_image
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_notification_tests
+      service-name-base: event_notification
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_webhook_tests:
     name: Event Webhook
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@122176019d357a02c9f3631243eb440dc996948f
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@8f40ba4dc66ab6f6db20efeea157b5a2e4dad684
     needs:
       - build_test_image
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_webhook_tests
+      service-name-base: event_webhook
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_meta_tests:
     name: Event Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@122176019d357a02c9f3631243eb440dc996948f
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@8f40ba4dc66ab6f6db20efeea157b5a2e4dad684
     needs:
       - build_test_image
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_meta_tests
+      service-name-base: event_meta
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_sdk_meta_tests:
     name: SDK Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@122176019d357a02c9f3631243eb440dc996948f
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@8f40ba4dc66ab6f6db20efeea157b5a2e4dad684
     needs:
       - build_test_image
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: sdk_meta_tests
+      service-name-base: sdk_meta
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
