@@ -18,24 +18,24 @@ services:
         - icalia-labs.registry-beta.semaphoreci.com/icalialabs/icalia-sdk-ruby:testing
     command: bundle exec rake spec
     volumes:
-      - ${HOME}/.gem/credentials:/usr/src/.gem/credentials:ro
+      - ${HOME}/.gem/credentials:/workspaces/icalia-sdk/.gem/credentials:ro
 
   core:
     <<: *library
-    working_dir: /usr/src/core
+    working_dir: /workspaces/icalia-sdk/core
 
   event_notification:
     <<: *library
-    working_dir: /usr/src/event-notification
+    working_dir: /workspaces/icalia-sdk/event-notification
 
   event_webhook:
     <<: *library
-    working_dir: /usr/src/event-webhook
+    working_dir: /workspaces/icalia-sdk/event-webhook
 
   event_meta:
     <<: *library
-    working_dir: /usr/src/event
+    working_dir: /workspaces/icalia-sdk/event
 
   sdk_meta:
     <<: *library
-    working_dir: /usr/src/sdk
+    working_dir: /workspaces/icalia-sdk/sdk

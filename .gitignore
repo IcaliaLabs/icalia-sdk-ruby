@@ -22,11 +22,8 @@
 .bundle/*
 !.bundle/config
 
-# Ignore VSCode Remote Container generated stuff:
-/.gitconfig
-/.vscode-server
-/.gnupg
-/.solargraph
+# Ignore docker compose overrides:
+docker-compose.override.yml
 
 # Ignore temporary files
 tmp/*
