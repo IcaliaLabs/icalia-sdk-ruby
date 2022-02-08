@@ -1,0 +1,63 @@
+on:
+  workflow_call:
+    inputs:
+      build-runner-uid:
+        required: true
+        type: string
+      build-runner-user:
+        required: true
+        type: string
+      service-name-base:
+        required: true
+        type: string
+      git-dasherized-branch:
+        required: true
+        type: string
+
+jobs:
+  test_and_build:
+    name: Test & Build
+    runs-on: ubuntu-latest
+    env:
+      UID: ${{ inputs.build-runner-uid }}
+      USER: ${{ inputs.build-runner-user }}
+      TESTING_IMAGE_TAG: ":testing-${{ inputs.git-dasherized-branch }}"
+    steps:
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Load Testing Image
+        id: load_test_image
+        uses: docker/build-push-action@v2
+        with:
+          load: true
+          target: development
+          platforms: linux/amd64
+          builder: ${{ steps.buildx.outputs.name }}
+          build-args: |
+            DEVELOPER_UID=${{ inputs.build-runner-uid }}
+            DEVELOPER_USERNAME=${{ inputs.build-runner-user }}
+          tags: |
+            icalialabs/icalia-sdk-ruby:testing-${{ inputs.git-dasherized-branch }}
+            icalialabs/icalia-sdk-ruby:testing-latest
+          cache-from: type=gha
+
+      - name: Checkout the code
+        uses: actions/checkout@v2.4.0
+
+      - name: Run Tests
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_tests
+
+      - name: Build Gem
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build
+
+      - name: List pkg directory
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build ls -lah pkg
+
+      - name: Persist Built Gem
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: built-gems
+          path: "**/pkg/*.gem"
+          retention-days: 1

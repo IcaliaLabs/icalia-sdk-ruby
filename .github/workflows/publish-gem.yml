@@ -1,0 +1,33 @@
+on:
+  workflow_call:
+    inputs:
+      base-directory:
+        required: true
+        type: string
+
+    secrets:
+      gem-host-api-key:
+        required: true
+
+jobs:
+  publish_gem:
+    name: Publish Gem
+    runs-on: ubuntu-latest
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.gem-host-api-key }}
+    steps:
+      - name: Restore builds
+        uses: actions/download-artifact@v2.1.0
+        with:
+          name: built-gems
+      
+      # Using the GEM_HOST_API_KEY env var to authenticate with Rubygems
+      # seems to work only on rubygems version 3.1 onwards... which is included
+      # in ruby 2.7.x:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.97.0
+        with:
+          ruby-version: "2.7"
+
+      - name: Try to publish
+        run: gem push ${{ inputs.base-directory }}/pkg/icalia-sdk-*.gem

@@ -1,0 +1,197 @@
+name: CI & CD
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+jobs:
+  build_test_image:
+    name: Build Test Image
+    runs-on: ubuntu-latest
+    outputs:
+      build-uuid: ${{ steps.uuidgen.outputs.uuid }}
+      build-runner-uid: ${{ steps.variables.outputs.runner-uid }}
+      build-runner-user: ${{ steps.variables.outputs.runner-user }}
+      build-timestamp: ${{ steps.build-timestamp.outputs.timestamp }}
+
+      git-branch: ${{ steps.variables.outputs.git-branch }}
+      git-dasherized-branch: ${{ steps.variables.outputs.git-dasherized-branch }}
+
+      git-commit-sha: ${{ steps.variables.outputs.git-commit-sha }}
+      git-commit-short-sha: ${{ steps.variables.outputs.git-commit-short-sha }}
+
+    steps:
+      - # We'll generate a unique id that we'll use to identify the build run
+        # on our systems
+        name: Generate UUID for build
+        id: uuidgen
+        run: echo "::set-output name=uuid::$(uuidgen)"
+
+      - name: Set additional variables
+        id: variables
+        uses: icalia-actions/common-variables@v0.0.3
+
+      - name: Set build timestamp
+        id: build-timestamp
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Image
+        id: build_test_image
+        uses: docker/build-push-action@v2
+        with:
+          target: development
+          platforms: linux/amd64
+
+          builder: ${{ steps.buildx.outputs.name }}
+
+          build-args: |
+            DEVELOPER_UID=${{ steps.variables.outputs.runner-uid }}
+            DEVELOPER_USERNAME=${{ steps.variables.outputs.runner-user }}
+          tags: |
+            icalialabs/icalia-sdk-ruby:testing-${{ steps.variables.outputs.git-dasherized-branch }}
+            icalialabs/icalia-sdk-ruby:testing-latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  build_core:
+    name: Core
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
+    needs:
+      - build_test_image
+    with:
+      build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
+      build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
+      service-name-base: core
+      git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  build_event_notification:
+    name: Event Notification
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
+    needs:
+      - build_test_image
+    with:
+      build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
+      build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
+      service-name-base: event_notification
+      git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  build_event_webhook:
+    name: Event Webhook
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
+    needs:
+      - build_test_image
+    with:
+      build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
+      build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
+      service-name-base: event_webhook
+      git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  build_event_meta:
+    name: Event Meta
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
+    needs:
+      - build_test_image
+    with:
+      build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
+      build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
+      service-name-base: event_meta
+      git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  build_sdk_meta:
+    name: SDK Meta
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
+    needs:
+      - build_test_image
+    with:
+      build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
+      build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
+      service-name-base: sdk_meta
+      git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  publish_core:
+    name: Core
+    if: github.event_name == 'release'
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: core
+    secrets:
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_event_notification:
+    name: Event Notification
+    if: github.event_name == 'release'
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event-notification
+    secrets:
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_event_webhook:
+    name: Event Webhook
+    if: github.event_name == 'release'
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event-webhook
+    secrets:
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_event_meta:
+    name: Event Meta
+    if: github.event_name == 'release'
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event
+    secrets:
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_sdk_meta:
+    name: SDK Meta
+    if: github.event_name == 'release'
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: sdk
+    secrets:
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}

@@ -5,7 +5,7 @@
 # setup the app containers and databases upon runnning.
 set -e
 
-: ${LIB_PATH:="/usr/src"}
+: ${LIB_PATH:="/workspaces/icalia-sdk"}
 : ${LIB_TEMP_PATH:="$LIB_PATH/tmp"}
 : ${LIB_SETUP_LOCK:="$LIB_TEMP_PATH/setup.lock"}
 : ${LIB_SETUP_WAIT:="5"}

@@ -1,8 +1,67 @@
-version: '3.7'
-
 services:
   # Emulates the Google PubSub service
   pubsub:
     image: vovimayhem/google-pubsub-emulator:latest
     ports:
-      - ${ICALIA_SDK_PUBSUB_PORT:-8085}:8085
+      - published: ${ICALIA_SDK_PUBSUB_PORT:-8085}
+        target: 8085
+
+  libraries: &library
+    image: icalialabs/icalia-sdk-ruby:development
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        DEVELOPER_UID: ${UID:-1000}
+        DEVELOPER_USERNAME: ${USER:-you}
+    volumes:
+      - type: bind
+        source: .
+        target: /workspaces/icalia-sdk
+    
+    stdin_open: true
+    tty: true
+
+    # [Optional] Required for ptrace-based debuggers like C++, Go, and Rust
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+
+    entrypoint: /workspaces/icalia-sdk/bin/dev-entrypoint.sh
+
+    environment:
+      
+      # Use the local pubsub emulator instead of Google Cloud:
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+
+      # Google Cloud variables:
+      GOOGLE_CLOUD_PROJECT: ${ICALIA_SDK_GOOGLE_CLOUD_PROJECT:-example-gcp-project-id}
+      GOOGLE_CLOUD_CREDENTIALS: /workspaces/icalia-sdk/google-cloud-credentials.json
+
+  core:
+    <<: *library
+    working_dir: /workspaces/icalia-sdk/core
+
+  event_notification:
+    <<: *library
+    depends_on:
+      - pubsub
+    working_dir: /workspaces/icalia-sdk/event-notification
+  
+  event_webhook:
+    <<: *library
+    working_dir: /workspaces/icalia-sdk/event-webhook
+  
+  event_meta:
+    <<: *library
+    depends_on:
+      - pubsub
+    working_dir: /workspaces/icalia-sdk/event
+  
+  sdk_meta:
+    <<: *library
+    depends_on:
+      - pubsub
+    working_dir: /workspaces/icalia-sdk/sdk
