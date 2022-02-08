@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    icalia-sdk-core (0.3.8)
+    icalia-sdk-core (0.3.9)
       activemodel (>= 5.2)
       jsonapi-deserializable (~> 0.2.0)
 
