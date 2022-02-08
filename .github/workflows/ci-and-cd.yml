@@ -120,3 +120,23 @@ jobs:
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
       service-name-base: sdk_meta
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
+
+  publish_core:
+    name: Publish Core
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore builds
+        uses: actions/download-artifact@v2.1.0
+        with:
+          name: built-gems
+
+      - name: Check workspace contents
+        run: find .
+      
+      # Using the GEM_HOST_API_KEY env var to authenticate with Rubygems
+      # seems to work only on rubygems version 3.1 onwards... which is included
+      # in ruby 2.7.x:
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v2.1.0
+        with:
+          ruby-version: "2.7"
