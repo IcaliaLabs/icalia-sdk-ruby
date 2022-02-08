@@ -1,5 +1,5 @@
 services:
-  tests_base: &testing
+  tests_base: &tests
     image: icalialabs/icalia-sdk-ruby${TESTING_IMAGE_TAG:-:testing-latest}
     build:
       context: .
@@ -30,28 +30,48 @@ services:
       # Use the local pubsub emulator instead of Google Cloud:
       PUBSUB_EMULATOR_HOST: pubsub:8085
 
-  core_tests:
-    <<: *testing
+  core_tests: &core
+    <<: *tests
     working_dir: /workspaces/icalia-sdk/core
 
-  event_notification_tests:
-    <<: *testing
+  core_build:
+    <<: *core
+    command: bundle exec rake build
+
+  event_notification_tests: &event_notification
+    <<: *tests
     depends_on:
       - pubsub
     working_dir: /workspaces/icalia-sdk/event-notification
+
+  event_notification_build:
+    <<: *event_notification
+    command: bundle exec rake build
   
-  event_webhook_tests:
-    <<: *testing
+  event_webhook_tests: &event_webhook
+    <<: *tests
     working_dir: /workspaces/icalia-sdk/event-webhook
+
+  event_webhook_build:
+    <<: *event_webhook
+    command: bundle exec rake build
   
-  event_meta_tests:
-    <<: *testing
+  event_meta_tests: &event_meta
+    <<: *tests
     depends_on:
       - pubsub
     working_dir: /workspaces/icalia-sdk/event
+
+  event_meta_build:
+    <<: *event_meta
+    command: bundle exec rake build
   
-  sdk_meta_tests:
-    <<: *testing
+  sdk_meta_tests: &sdk_meta
+    <<: *tests
     depends_on:
       - pubsub
     working_dir: /workspaces/icalia-sdk/sdk
+
+  sdk_meta_build:
+    <<: *sdk_meta
+    command: bundle exec rake build

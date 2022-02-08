@@ -7,7 +7,7 @@ on:
       build-runner-user:
         required: true
         type: string
-      test-service-name:
+      service-name-base:
         required: true
         type: string
       git-dasherized-branch:
@@ -15,9 +15,13 @@ on:
         type: string
 
 jobs:
-  run_tests:
-    name: Run tests
+  test_and_build:
+    name: Test & Build
     runs-on: ubuntu-latest
+    env:
+      UID: ${{ inputs.build-runner-uid }}
+      USER: ${{ inputs.build-runner-user }}
+      TESTING_IMAGE_TAG: ":testing-${{ inputs.git-dasherized-branch }}"
     steps:
       - name: Set up Docker Buildx
         id: buildx
@@ -42,9 +46,8 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2.4.0
 
-      - name: Run tests
-        env:
-          UID: ${{ inputs.build-runner-uid }}
-          USER: ${{ inputs.build-runner-user }}
-          TESTING_IMAGE_TAG: ":testing-${{ inputs.git-dasherized-branch }}"
-        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.test-service-name }} rake spec
+      - name: Run Tests
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_tests
+
+      - name: Build Gem
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.service-name-base }}_build
