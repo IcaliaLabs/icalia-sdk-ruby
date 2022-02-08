@@ -54,8 +54,3 @@ RUN for dir in core event-notification event-webhook event sdk; do \
   bundle install --jobs=4 --retry=3 ; \
   cd .. ; \
   done
-
-# Stage II: Testing:
-FROM development AS testing
-
-COPY . /workspaces/icalia-sdk/
