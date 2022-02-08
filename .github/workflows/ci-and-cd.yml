@@ -68,7 +68,7 @@ jobs:
 
   build_core:
     name: Core
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
     needs:
       - build_test_image
     with:
@@ -79,7 +79,7 @@ jobs:
 
   build_event_notification:
     name: Event Notification
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
     needs:
       - build_test_image
     with:
@@ -90,7 +90,7 @@ jobs:
 
   build_event_webhook:
     name: Event Webhook
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
     needs:
       - build_test_image
     with:
@@ -101,7 +101,7 @@ jobs:
 
   build_event_meta:
     name: Event Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
     needs:
       - build_test_image
     with:
@@ -112,7 +112,7 @@ jobs:
 
   build_sdk_meta:
     name: SDK Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db
     needs:
       - build_test_image
     with:
@@ -124,7 +124,7 @@ jobs:
   publish_core:
     name: Core
     if: github.event_name == 'release'
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
     needs:
       - build_core
       - build_event_notification
@@ -139,7 +139,7 @@ jobs:
   publish_event_notification:
     name: Event Notification
     if: github.event_name == 'release'
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
     needs:
       - build_core
       - build_event_notification
@@ -154,7 +154,7 @@ jobs:
   publish_event_webhook:
     name: Event Webhook
     if: github.event_name == 'release'
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
     needs:
       - build_core
       - build_event_notification
@@ -169,7 +169,7 @@ jobs:
   publish_event_meta:
     name: Event Meta
     if: github.event_name == 'release'
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
     needs:
       - build_core
       - build_event_notification
@@ -184,7 +184,7 @@ jobs:
   publish_sdk_meta:
     name: SDK Meta
     if: github.event_name == 'release'
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@a4019ddc46ac5022241bbd7b03b91d98212ac4db  
     needs:
       - build_core
       - build_event_notification
