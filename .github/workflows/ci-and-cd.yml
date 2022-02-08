@@ -68,7 +68,7 @@ jobs:
 
   run_core_tests:
     name: Core
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@7a857cb16230ef015fcc797b71aee37365332838
+    uses: ./.github/workflows/test-and-build-gem.yml
     needs:
       - build_test_image
     with:
@@ -79,7 +79,7 @@ jobs:
 
   run_event_notification_tests:
     name: Event Notification
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@7a857cb16230ef015fcc797b71aee37365332838
+    uses: ./.github/workflows/test-and-build-gem.yml
     needs:
       - build_test_image
     with:
@@ -90,7 +90,7 @@ jobs:
 
   run_event_webhook_tests:
     name: Event Webhook
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@7a857cb16230ef015fcc797b71aee37365332838
+    uses: ./.github/workflows/test-and-build-gem.yml
     needs:
       - build_test_image
     with:
@@ -101,7 +101,7 @@ jobs:
 
   run_event_meta_tests:
     name: Event Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@7a857cb16230ef015fcc797b71aee37365332838
+    uses: ./.github/workflows/test-and-build-gem.yml
     needs:
       - build_test_image
     with:
@@ -112,7 +112,7 @@ jobs:
 
   run_sdk_meta_tests:
     name: SDK Meta
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@7a857cb16230ef015fcc797b71aee37365332838
+    uses: ./.github/workflows/test-and-build-gem.yml
     needs:
       - build_test_image
     with:
