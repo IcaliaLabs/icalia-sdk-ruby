@@ -74,7 +74,7 @@ jobs:
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: core
+      test-service-name: core_tests
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_notification_tests:
@@ -85,7 +85,7 @@ jobs:
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_notification
+      test-service-name: event_notification_tests
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_webhook_tests:
@@ -96,7 +96,7 @@ jobs:
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_webhook
+      test-service-name: event_webhook_tests
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_event_meta_tests:
@@ -107,7 +107,7 @@ jobs:
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: event_meta
+      test-service-name: event_meta_tests
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   run_sdk_meta_tests:
@@ -118,5 +118,5 @@ jobs:
     with:
       build-runner-uid: ${{ needs.build_test_image.outputs.build-runner-uid }}
       build-runner-user: ${{ needs.build_test_image.outputs.build-runner-user }}
-      test-service-name: sdk_meta
+      test-service-name: sdk_meta_tests
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}

@@ -3,15 +3,22 @@ services:
   pubsub:
     image: vovimayhem/google-pubsub-emulator:latest
     ports:
-      - ${ICALIA_SDK_PUBSUB_PORT:-8085}:8085
+      - published: ${ICALIA_SDK_PUBSUB_PORT:-8085}
+        target: 8085
 
   libraries: &library
     image: icalialabs/icalia-sdk-ruby:development
     build:
       context: .
+      dockerfile: Dockerfile
       target: development
+      args:
+        DEVELOPER_UID: ${UID:-1000}
+        DEVELOPER_USERNAME: ${USER:-you}
     volumes:
-      - .:/workspaces/icalia-sdk
+      - type: bind
+        source: .
+        target: /workspaces/icalia-sdk
     
     stdin_open: true
     tty: true
