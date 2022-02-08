@@ -122,32 +122,66 @@ jobs:
       git-dasherized-branch: ${{ needs.build_test_image.outputs.git-dasherized-branch }}
 
   publish_core:
-    name: Publish Core
-    runs-on: ubuntu-latest
+    name: Core
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
     needs:
       - build_core
       - build_event_notification
       - build_event_webhook
       - build_event_meta
       - build_sdk_meta
-    env:
-      GEM_HOST_API_KEY: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
-    steps:
-      - name: Restore builds
-        uses: actions/download-artifact@v2.1.0
-        with:
-          name: built-gems
+    with:
+      base-directory: core
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
-      - name: Check workspace contents
-        run: find .
-      
-      # Using the GEM_HOST_API_KEY env var to authenticate with Rubygems
-      # seems to work only on rubygems version 3.1 onwards... which is included
-      # in ruby 2.7.x:
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.97.0
-        with:
-          ruby-version: "2.7"
+  publish_event_notification:
+    name: Event Notification
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event-notification
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
-      - name: Try to publish
-        run: gem push core/pkg/icalia-sdk-*.gem
+  publish_event_webhook:
+    name: Event Webhook
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event-webhook
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_event_meta:
+    name: Event Meta
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: event
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
+
+  publish_sdk_meta:
+    name: SDK Meta
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/publish-gem.yml@0bb9b2447662675221c0dc0ff11cede23ecb164d  
+    needs:
+      - build_core
+      - build_event_notification
+      - build_event_webhook
+      - build_event_meta
+      - build_sdk_meta
+    with:
+      base-directory: sdk
+      gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
