@@ -66,7 +66,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  run_core_tests:
+  build_core:
     name: Core
     uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/test-and-build-gem.yml@278ee05ac7b7043ce89c2585e0da8d73b0c60d61
     needs:
@@ -124,6 +124,8 @@ jobs:
   publish_core:
     name: Publish Core
     runs-on: ubuntu-latest
+    needs:
+      - build_core
     steps:
       - name: Restore builds
         uses: actions/download-artifact@v2.1.0

@@ -1,0 +1,34 @@
+on:
+  workflow_call:
+    inputs:
+      build-runner-uid:
+        required: true
+        type: string
+      build-runner-user:
+        required: true
+        type: string
+      test-service-name:
+        required: true
+        type: string
+      git-dasherized-branch:
+        required: true
+        type: string
+
+jobs:
+  publish_gem:
+    name: Publish Gem
+    runs-on: ubuntu-latest
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.gem-host-api-key }}
+    steps:
+      
+      # Using the GEM_HOST_API_KEY env var to authenticate with Rubygems
+      # seems to work only on rubygems version 3.1 onwards... which is included
+      # in ruby 2.7.x:
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v2.1.0
+        with:
+          ruby-version: "2.7"
+
+      - name: Try to publish
+        run: gem push on_container*.gem
