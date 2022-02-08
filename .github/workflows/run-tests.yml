@@ -47,4 +47,4 @@ jobs:
           UID: ${{ inputs.build-runner-uid }}
           USER: ${{ inputs.build-runner-user }}
           TESTING_IMAGE_TAG: ":testing-${{ inputs.git-dasherized-branch }}"
-        run: docker compose -f docker-compose.yml -f ci-compose.yml run ${{ inputs.test-service-name }}
+        run: docker compose -f docker-compose.yml -f ci-compose.yml run --rm ${{ inputs.test-service-name }} rake spec
