@@ -68,7 +68,7 @@ jobs:
 
   run_core_tests:
     name: Run core tests
-    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests@5dc46e163c4c3890007b54494af1f62fced439db
+    uses: IcaliaLabs/icalia-sdk-ruby/.github/workflows/run-tests.yml@5dc46e163c4c3890007b54494af1f62fced439db
     needs:
       - build_test_image
     with:
