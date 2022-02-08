@@ -18,9 +18,6 @@ jobs:
   run_tests:
     name: Run tests
     runs-on: ubuntu-latest
-    needs:
-      - build_test_image
-
     steps:
       - name: Set up Docker Buildx
         id: buildx
