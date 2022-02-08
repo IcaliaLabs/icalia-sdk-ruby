@@ -2,6 +2,6 @@
 
 module Icalia
   module SDK
-    EVENT_VERSION = '0.3.7'
+    EVENT_VERSION = '0.3.8'
   end
 end
