@@ -132,6 +132,7 @@ jobs:
       - build_sdk_meta
     with:
       base-directory: core
+    secrets:
       gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
   publish_event_notification:
@@ -145,6 +146,7 @@ jobs:
       - build_sdk_meta
     with:
       base-directory: event-notification
+    secrets:
       gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
   publish_event_webhook:
@@ -158,6 +160,7 @@ jobs:
       - build_sdk_meta
     with:
       base-directory: event-webhook
+    secrets:
       gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
   publish_event_meta:
@@ -171,6 +174,7 @@ jobs:
       - build_sdk_meta
     with:
       base-directory: event
+    secrets:
       gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
 
   publish_sdk_meta:
@@ -184,4 +188,5 @@ jobs:
       - build_sdk_meta
     with:
       base-directory: sdk
+    secrets:
       gem-host-api-key: ${{ secrets.ICALIALABS_GEM_HOST_API_KEY }}
